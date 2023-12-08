@@ -1,21 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import '@picocss/pico'
 import './style/theme.css'
 import './App.css'
+import loginImg from './assets/loginImg.svg'
 
+
+const Image = () => {
+  return (
+    <div className='img-container'>
+      <img src={loginImg} alt="login image" srcset="" />
+    </div>
+  )
+}
+
+
+const LoginInput = () => {
+  return (
+    <div className='input-container'>
+      <label htmlFor="username">Username</label>
+      <input type="text" name='username' placeholder='username' />
+      <label htmlFor="password">Password</label>
+      <input type="password" name='password' placeholder='password' />
+      <button>Login </button>
+    </div>
+  )
+}
 
 function App() {
   return (
     <>
-      <div data-theme="dark" className='container'>
-        <label htmlFor="username">Username</label>
-        <input type="text" name='username' />
+      <form action="">
+        <div data-theme="dark" className='container container-flex'>
 
-        <label htmlFor="username">Username</label>
-        <input type="text" name='username' />
-      </div>
+          <LoginInput />
+
+          <Image />
+
+        </div>
+      </form>
     </>
   )
 }

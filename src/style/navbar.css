@@ -1,0 +1,28 @@
+.switch-theme {
+    border-radius: 3.5rem;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar > li{
+    margin: .5rem 2.5rem;
+    font-size: 1rem;
+}
+
+.dark-mode-container {
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    & > label {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+}

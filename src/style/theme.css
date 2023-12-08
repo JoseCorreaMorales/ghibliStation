@@ -1,40 +1,46 @@
 /**
  * Custom theme
 */
-/* Red Light scheme (Default) */
 /* Can be forced with data-theme="light" */
 [data-theme="light"],
 :root:not([data-theme="dark"]) {
-  --primary: #711DB0;
-  --primary-hover: #C21292;
-  --primary-focus: #EF4040;
-  --primary-inverse: #FFA732;
+  --primary: #35155D;
+  --primary-hover: #512B81;
+  --primary-focus: #4477CE;
+  --primary-inverse: #8CABFF;
 }
 
-/* Red Dark scheme (Auto) */
+/* Dark scheme (Auto) */
 /* Automatically enabled if user has Dark mode enabled */
 @media only screen and (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --primary: #7071E8;
-    --primary-hover: #C683D7;
-    --primary-focus: #C683D7;
-    --primary-inverse: #FFC7C7;
+    --primary: #E19898;
+    --primary-hover: #A2678A;
+    --primary-focus: #4D3C77;
+    --primary-inverse: #3F1D38;
   }
 }
 
-/* Red Dark scheme (Forced) */
+/* Dark scheme (Forced) */
 /* Enabled if forced with data-theme="dark" */
 [data-theme="dark"] {
-    --primary: #711DB0;
-    --primary-hover: #C21292;
-    --primary-focus: #EF4040;
-    --primary-inverse: #FFA732;
+  --primary: #35155D;
+  --primary-hover: #512B81;
+  --primary-focus: #4477CE;
+  --primary-inverse: #8CABFF;
+
 }
 
-/* Red (Common styles) */
+/* (Common styles) */
 :root {
-    --primary: #7071E8;
-    --primary-hover: #C683D7;
-    --primary-focus: #C683D7;
-    --primary-inverse: #FFC7C7;
+  --primary: #35155D;
+  --primary-hover: #512B81;
+  --primary-focus: #4477CE;
+  --primary-inverse: #8CABFF;
+
+  --form-element-active-border-color: var(--primary);
+  --form-element-focus-color: var(--primary-focus);
+  --switch-color: var(--primary-inverse);
+  --switch-checked-background-color: var(--primary);
 }
+
