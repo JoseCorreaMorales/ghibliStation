@@ -4,55 +4,90 @@ import './style/theme.css'
 import './App.css'
 import loginImg from './assets/loginImg.svg'
 
-
 const Image = () => {
   return (
     <div className='img-container'>
-      <img src={loginImg} alt="login image" />
+      <img src={loginImg} alt="login image" title='Login image' />
     </div>
   )
 }
 
 
 const LoginInput = ({ onFormSubmit }) => {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
-  const handleEmailChange = ({ target: { value } }) => {
-    setUsername(value);
-  }
-  const handlePasswordChange = ({ target: { value } }) => {
-    setPassword(value);
-  }
+  const validateLogin = () => {
+    let isValid = true;
 
-  const handleFormSubmit = (e) => { 
-      //e.preventDefault();
-      onFormSubmit(username, password);
-      
-   }
+    if (username === '' || password === '') {
+      setUsernameError('Please enter all fields');
+      setPasswordError('Please enter all fields');
+      isValid = false;  
+    }else {
+      setPasswordError(''); 
+    }
+
+    if (!username.includes('@') || !username.includes('.')) {
+      setUsernameError('Invalid Email');
+      isValid = false;
+    } else {
+      setUsernameError('');
+    }
+
+    if (password.length < 8) {
+      setPasswordError('Password must be at least 8 characters');
+      isValid = false;
+    } else {
+      setPasswordError('');
+    }
+    return isValid;
+  };
+  /*   const handleEmailChange = ({ target: { value } }) => {
+      setUsername(value);
+    }
+    const handlePasswordChange = ({ target: { value } }) => {
+      setPassword(value);
+    } */
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (validateLogin()) onFormSubmit(username, password);
+  }
 
   return (
     <div className='input-container'>
-      <label htmlFor="username">Username</label>
-      <input type="email" name='username' placeholder='username' onChange={ handleEmailChange } required />
-      <label htmlFor="password">Password</label>
-      <input type="password" name='password' placeholder='password' onChange={ handlePasswordChange } required />
+      <div className='input-item'>
+        <label htmlFor="username">Username</label>
+        <input type="email" name='username' placeholder='username' onChange={(e) => setUsername(e.target.value)} required />
+        {usernameError && <del className='error'>{usernameError}</del>}
+      </div>
+
+      <div className='input-item'>
+        <label htmlFor="password">Password</label>
+        <input type="password" name='password' placeholder='password' onChange={(e) => setPassword(e.target.value)} required />
+        {passwordError && <del className='error'>{passwordError}</del>}
+      </div>
+
+
       <button type='submit' onClick={ handleFormSubmit }>Login </button>
     </div>
   )
 }
 
 function App() {
-  const handleFormSubmit = (username, password) => {    
+  const handleFormSubmit = (username, password) => {
     console.log("data ", username, password);
   }
 
   return (
     <>
-      <form action="" onSubmit={ (e) => e.preventDefault() }>
+      <form action="" onSubmit={(e) => e.preventDefault()}>
         <div data-theme="dark" className='container container-flex'>
 
-          <LoginInput onFormSubmit = { handleFormSubmit } />
+          <LoginInput onFormSubmit={handleFormSubmit} />
 
           <Image />
 

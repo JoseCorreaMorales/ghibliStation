@@ -18,6 +18,15 @@ form {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    flex-direction: column;
+   
+}
+
+.input-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .5rem;
 }
 
 .img-container {
@@ -26,10 +35,15 @@ form {
     align-items: center;
 }
 
-.input-container > label {
+del {
+    text-decoration: none;
+}
+
+.input-container .input-item > label {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 @media (max-width: 1000px) {
