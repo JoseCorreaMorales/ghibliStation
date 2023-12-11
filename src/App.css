@@ -9,6 +9,7 @@ form {
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 .input-container {
@@ -45,4 +46,10 @@ form {
         margin: 0 auto;
     }
 
+}
+
+@media (width < 1000px) {
+    form {
+        padding-top: 40vh;
+    }
 }
