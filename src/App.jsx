@@ -3,6 +3,9 @@ import '@picocss/pico'
 import './style/theme.css'
 import './App.css'
 import loginImg from './assets/loginImg.svg'
+import { app, firestore } from './firebase/firebase'
+import { collection, addDoc } from 'firebase/firestore' // for cloud firestore database 
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth' // for authentication
 
 const Image = () => {
   return (
