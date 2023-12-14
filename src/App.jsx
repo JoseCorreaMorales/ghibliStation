@@ -55,9 +55,19 @@ const LoginInput = ({ onFormSubmit }) => {
     const handlePasswordChange = ({ target: { value } }) => {
       setPassword(value);
     } */
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit =  async (e) => {
     e.preventDefault();
-    if (validateLogin()) onFormSubmit(username, password);
+    if (validateLogin()) {
+      onFormSubmit(username, password);
+
+      try {
+        const auth = getAuth(app);
+        const userCredential = await signInWithEmailAndPassword(auth, username, password);
+        console.log('Inicio de sesión exitoso. Usuario:', userCredential.user);
+      }catch (error) {
+        console.error(error);
+      }
+    }
   }
 
   return (
