@@ -5,7 +5,7 @@ import '../style/login.css'
 import loginImg from '../assets/loginImg.svg'
 import { app, firestore } from '../firebase/firebase'
 import { collection, addDoc } from 'firebase/firestore' // for cloud firestore database 
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth' // for authentication
+import { getAuth, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from 'firebase/auth' // for authentication
 
 const Image = () => {
   return (
@@ -22,6 +22,7 @@ const LoginInput = ({ onFormSubmit }) => {
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [userNotFound, setUserNotFound] = useState('');
 
   const validateLogin = () => {
     let isValid = true;
@@ -29,9 +30,9 @@ const LoginInput = ({ onFormSubmit }) => {
     if (username === '' || password === '') {
       setUsernameError('Please enter all fields');
       setPasswordError('Please enter all fields');
-      isValid = false;  
-    }else {
-      setPasswordError(''); 
+      isValid = false;
+    } else {
+      setPasswordError('');
     }
 
     if (!username.includes('@') || !username.includes('.')) {
@@ -55,16 +56,28 @@ const LoginInput = ({ onFormSubmit }) => {
     const handlePasswordChange = ({ target: { value } }) => {
       setPassword(value);
     } */
-  const handleFormSubmit =  async (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (validateLogin()) {
       onFormSubmit(username, password);
 
       try {
-        const auth = getAuth(app);
-        const userCredential = await signInWithEmailAndPassword(auth, username, password);
-        console.log('Inicio de sesión exitoso. Usuario:', userCredential.user);
-      }catch (error) {
+        const auth = getAuth();
+        /* const signinMethod = await app.auth().fetchSignInMethodsForEmail(username) */
+        const signinMethod = await fetchSignInMethodsForEmail(auth, username);
+        if (signinMethod.length === 0) {
+          // user does not exist
+          setUserNotFound('User not found');
+          return;
+        } else {
+          const userCredential = await signInWithEmailAndPassword(auth, username, password);
+          userNotFound('');
+
+          console.log('Inicio de sesión exitoso. Usuario:', userCredential.user);
+        }
+
+
+      } catch (error) {
         console.error(error);
       }
     }
@@ -85,7 +98,8 @@ const LoginInput = ({ onFormSubmit }) => {
       </div>
 
 
-      <button type='submit' onClick={ handleFormSubmit }>Login </button>
+      <button type='submit' onClick={handleFormSubmit}>Login </button>
+      {userNotFound && <del className='error'>{userNotFound}</del>}
     </div>
   )
 }
