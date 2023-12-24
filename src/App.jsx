@@ -1,17 +1,25 @@
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { ghibliHome } from './components/ghibliHome';
-import { navbar } from './components/navbar';
-import { routes } from './components/routes';
-import  { globalState } from './context/globalState';
-import { GhibliContext } from './context/ghibliContext'
+import Navbar from './components/navbar';
+import Rutas from './components/routes';
+import GlobalState from './context/globalState'; 
+import GhibliContext from './context/ghibliContext'
+
 
 export default function App() {
   return (
     <Router>
-        <GhibliContext>
-            <navbar />
-            <routes />
-        </GhibliContext>
+        <GlobalState>
+          <GhibliContext.Consumer>
+          {
+            (context) => (
+              <>
+              <Navbar />
+              <Rutas />
+              </>
+            )
+          }
+          </GhibliContext.Consumer>
+        </GlobalState>
     </Router>
     
   )

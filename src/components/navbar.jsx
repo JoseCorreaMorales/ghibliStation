@@ -1,5 +1,8 @@
 import '@picocss/pico'
 import '../style/navbar.css'
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import GhibliContext from '../context/ghibliContext'
+import { useContext } from 'react';
 
 const ToggleTheme = () => {
     const changeTheme = (e) => {
@@ -21,12 +24,36 @@ const ToggleTheme = () => {
 }
 
 function Navbar() {
+    const context = useContext(GhibliContext);
+
     return (
         <nav>
             <ul className='navbar'>
                 <li>
                     <strong>Brand</strong>
                 </li>
+
+                {context.loginUser && (
+                    <>
+                        <li>
+                            <Link to="/home">Home  </Link>
+                        </li>
+                    </>
+                )
+                }
+
+                {!context.loginUser && (
+                    <>
+                        <li>
+                            <Link to="/">Login  </Link>
+                        </li>
+                        <li>
+                            <Link to="signup">Sign up  </Link>
+                        </li>
+                    </>
+                )
+                }
+
                 <li>
                     <ToggleTheme />
                 </li>

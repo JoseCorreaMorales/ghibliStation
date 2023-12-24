@@ -1,7 +1,7 @@
 import React from "react";
-import { ghibliContext } from "./ghibliContext";
+import GhibliContext from "./ghibliContext";
 
-export default function GlobalState(props) {
+export default function GlobalState({ children }) {
     const [userLogin, setUserLogin] = React.useState(localStorage.getItem('userLogin'));
 
     function loginUser() {
@@ -15,9 +15,9 @@ export default function GlobalState(props) {
     }
 
     return (
-        <ghibliContext.Provider value={{ userLogin, loginUser, logoutUser }}>
+        <GhibliContext.Provider value={{ userLogin, loginUser, logoutUser }}>
             { children }
-        </ghibliContext.Provider>
+        </GhibliContext.Provider>
     )
     
 }

@@ -90,7 +90,7 @@ const LoginInput = ({ onFormSubmit }) => {
   )
 }
 
-function App() {
+function Login() {
   const handleFormSubmit = (username, password) => {
     console.log("data ", username, password);
   }
@@ -110,4 +110,4 @@ function App() {
   )
 }
 
-export default App
+export default Login
