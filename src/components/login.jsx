@@ -3,9 +3,10 @@ import '@picocss/pico'
 import '../style/theme.css'
 import '../style/login.css'
 import loginImg from '../assets/loginImg.svg'
+import AuthForm from './AuthForm'
 import { app, firestore } from '../firebase/firebase'
-import { collection, addDoc } from 'firebase/firestore' // for cloud firestore database 
 import { getAuth, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from 'firebase/auth' // for authentication
+
 
 const Image = () => {
   return (
@@ -15,107 +16,42 @@ const Image = () => {
   )
 }
 
-
-const LoginInput = ({ onFormSubmit }) => {
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [usernameError, setUsernameError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [userNotFound, setUserNotFound] = useState('');
-
-  const validateLogin = () => {
-    let isValid = true;
-
-    if (username === '' || password === '') {
-      setUsernameError('Please enter all fields');
-      setPasswordError('Please enter all fields');
-      isValid = false;
-    } else {
-      setPasswordError('');
-    }
-
-    if (!username.includes('@') || !username.includes('.')) {
-      setUsernameError('Invalid Email');
-      isValid = false;
-    } else {
-      setUsernameError('');
-    }
-
-    if (password.length < 8) {
-      setPasswordError('Password must be at least 8 characters');
-      isValid = false;
-    } else {
-      setPasswordError('');
-    }
-    return isValid;
-  };
-  /*   const handleEmailChange = ({ target: { value } }) => {
-      setUsername(value);
-    }
-    const handlePasswordChange = ({ target: { value } }) => {
-      setPassword(value);
-    } */
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    if (validateLogin()) {
-      onFormSubmit(username, password);
-
-      try {
-        const auth = getAuth();
-        /* const signinMethod = await app.auth().fetchSignInMethodsForEmail(username) */
-        const signinMethod = await fetchSignInMethodsForEmail(auth, username);
-        if (signinMethod.length === 0) {
-          // user does not exist
-          setUserNotFound('User not found');
-          return;
-        } else {
-          const userCredential = await signInWithEmailAndPassword(auth, username, password);
-          userNotFound('');
-
-          console.log('Inicio de sesión exitoso. Usuario:', userCredential.user);
-        }
-
-
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  }
-
-  return (
-    <div className='input-container'>
-      <div className='input-item'>
-        <label htmlFor="username">Username</label>
-        <input type="email" name='username' placeholder='username' onChange={(e) => setUsername(e.target.value)} required />
-        {usernameError && <del className='error'>{usernameError}</del>}
-      </div>
-
-      <div className='input-item'>
-        <label htmlFor="password">Password</label>
-        <input type="password" name='password' placeholder='password' onChange={(e) => setPassword(e.target.value)} required />
-        {passwordError && <del className='error'>{passwordError}</del>}
-      </div>
-
-
-      <button type='submit' onClick={handleFormSubmit}>Login </button>
-      {userNotFound && <del className='error'>{userNotFound}</del>}
-    </div>
-  )
-}
-
 function Login() {
-  const handleFormSubmit = (username, password) => {
-    console.log("data ", username, password);
+const [userNotFound, setUserNotFound] = useState('');
+  async function handleFormSubmit(username, password) {
+    try {
+      const auth = getAuth();
+
+      const userCredential = await signInWithEmailAndPassword(auth, username, password);
+        console.log('Inicio de sesión exitoso. Usuario:', userCredential.email);
+
+    } catch (error) {
+      if (error.code === 'auth/invalid-credential') {
+        console.warn('User not found');
+        setUserNotFound('User not found');
+      }else {
+        setUserNotFound('');
+      }      
+    }
   }
+        /* const signinMethod = await fetchSignInMethodsForEmail(auth, username);
+
+      if (signinMethod.length === 0) {
+        console.log('User not found', signinMethod);
+        return;
+      } else {
+        const userCredential = await signInWithEmailAndPassword(auth, username, password);
+        console.log('Inicio de sesión exitoso. Usuario:', userCredential.user);
+      } */
 
   return (
     <>
       <form action="" onSubmit={(e) => e.preventDefault()}>
         <div data-theme="dark" className='container container-flex'>
 
-          <LoginInput onFormSubmit={handleFormSubmit} />
-
+          <AuthForm onFormSubmit={handleFormSubmit} buttonText={"Login"} isLogin={true} >
+          </AuthForm>
+          {userNotFound && <del className='error'>{userNotFound}</del>}
           <Image />
 
         </div>
