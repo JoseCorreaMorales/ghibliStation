@@ -16,9 +16,9 @@ export default function App() {
               <Navbar />
               <Rutas />
               </>
-            )
+             )
           }
-          </GhibliContext.Consumer>
+          </GhibliContext.Consumer>  
         </GlobalState>
     </Router>
     

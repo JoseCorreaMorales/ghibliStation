@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import  GhibliContext  from '../context/ghibliContext'
 import '@picocss/pico'
 import '../style/theme.css'
 import '../style/login.css'
@@ -7,6 +9,8 @@ import AuthForm from './AuthForm'
 import { app, firestore } from '../firebase/firebase'
 import { getAuth, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from 'firebase/auth' // for authentication
 
+
+//const context = useContext(GhibliContext);
 
 const Image = () => {
   return (
@@ -17,13 +21,18 @@ const Image = () => {
 }
 
 function Login() {
+  const { loginUser } = useContext(GhibliContext);
+  const navigate = useNavigate();
+  
 const [userNotFound, setUserNotFound] = useState('');
   async function handleFormSubmit(username, password) {
     try {
       const auth = getAuth();
 
       const userCredential = await signInWithEmailAndPassword(auth, username, password);
-        console.log('Inicio de sesión exitoso. Usuario:', userCredential.email);
+         console.log('Inicio de sesión exitoso. Usuario:', userCredential.email);  
+        loginUser(); 
+        navigate('/home');
 
     } catch (error) {
       if (error.code === 'auth/invalid-credential') {

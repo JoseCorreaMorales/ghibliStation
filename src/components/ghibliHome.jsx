@@ -4,6 +4,7 @@ const GhibliHome = () => {
     return (
         <div>
             {/* Your code here */}
+            We are in GhibliHome
         </div>
     );
 };
