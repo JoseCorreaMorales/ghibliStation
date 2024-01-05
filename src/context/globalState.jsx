@@ -1,17 +1,17 @@
-import React from "react";
+import { useState } from "react";
 import GhibliContext from "./ghibliContext";
 
 export default function GlobalState({ children }) {
-    const [userLogin, setUserLogin] = React.useState(localStorage.getItem('login'));
+    const [userLogin, setUserLogin] = useState(sessionStorage.getItem('login'));
 
     function loginUser() {
         setUserLogin(true);
-        localStorage.setItem('login', true);
+        sessionStorage.setItem('login', true);
     }
 
     function logoutUser() {
         setUserLogin(false);
-        localStorage.removeItem('login');
+        sessionStorage.removeItem('login');
     }
 
     return (
