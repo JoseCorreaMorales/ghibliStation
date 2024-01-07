@@ -3,6 +3,7 @@ import GlobalState from "../context/globalState";
 import GhibliContext from "../context/ghibliContext";
 
 import Login from "../components/login";
+import Register from "../components/resgister";
 import GhibliHome from "../components/ghibliHome";
 
 export default function Rutas() {
@@ -16,6 +17,7 @@ export default function Rutas() {
             <Routes>
               <Route path="/" element={<Navigate to="/login" />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Register />} />
               <Route
                 path="/home"
                 element={context.userLogin ? <GhibliHome /> : <Navigate to="/login" />}

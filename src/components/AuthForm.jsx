@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react'
 import '@picocss/pico'
 import '../style/theme.css'
 import '../style/login.css'
-import loginImg from '../assets/loginImg.svg'
-import { app, firestore } from '../firebase/firebase'
 
 const AuthForm = ({ onFormSubmit, buttonText, isLogin }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState(''); 
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [userNotFound, setUserNotFound] = useState('');
+  const [nameError, setNameError] = useState('');
 
 
 
@@ -55,6 +55,15 @@ const AuthForm = ({ onFormSubmit, buttonText, isLogin }) => {
 
   return (
     <div className='input-container'>
+      {!isLogin ? <h2>Hey, join us!</h2> : <h2>Welcome back!</h2>}
+
+      {
+      !isLogin && <div className='input-item'>                
+        <label htmlFor="name">Name</label>
+        <input type="text" name='name' placeholder='name' onChange={(e) => setName(e.target.value)} required />
+        {nameError && <del className='error'>{nameError}</del>}
+      </div>
+      }
       <div className='input-item'>
         <label htmlFor="username">Username</label>
         <input type="email" name='username' placeholder='username' onChange={(e) => setUsername(e.target.value)} required />
