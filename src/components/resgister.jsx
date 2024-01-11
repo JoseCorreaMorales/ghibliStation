@@ -1,37 +1,48 @@
-import { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import  GhibliContext  from '../context/ghibliContext'
-import '@picocss/pico'
-import '../style/theme.css'
-import '../style/login.css'
-import loginImg from '../assets/loginImg.svg'
-import AuthForm from './AuthForm'
-import { app, firestore } from '../firebase/firebase'
-import { getAuth, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from 'firebase/auth' // for authentication
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import GhibliContext from "../context/ghibliContext";
+import "@picocss/pico";
+import "../style/theme.css";
+import "../style/login.css";
+import loginImg from "../assets/loginImg.svg";
+import AuthForm from "./AuthForm";
+import { createuser } from "../services/usersServices";
+
 
 const Image = () => {
   return (
-    <div className='img-container'>
-      <img src={loginImg} alt="login image" title='Sign-up image' />
+    <div className="img-container">
+      <img src={loginImg} alt="login image" title="Sign-up image" />
     </div>
-  )
-}
+  );
+};
 
-function Login() {
+function Signup() {
   const navigate = useNavigate();
-  async function handleFormSubmit(username, password) {
-    
+  async function handleFormSubmit(name, username, password) {
+    try {
+      const user = await createuser(name, username, password);
+     
+      console.log("User created:", user.user.uid, user.user.email);      
+      navigate("/home");
+    } catch (error) {
+      console.log("Error:", error);
+    }
   }
   return (
     <>
       <form action="" onSubmit={(e) => e.preventDefault()}>
-        <div data-theme="dark" className='container container-flex'>
-          <AuthForm onFormSubmit={handleFormSubmit} buttonText={"Sign-up"} isLogin={ false } ></AuthForm>
+        <div data-theme="dark" className="container container-flex">
+          <AuthForm
+            onFormSubmit={handleFormSubmit}
+            buttonText={"Sign-up"}
+            isLogin={false}
+          ></AuthForm>
           <Image />
         </div>
       </form>
     </>
-  )
+  );
 }
 
-export default Login
+export default Signup;

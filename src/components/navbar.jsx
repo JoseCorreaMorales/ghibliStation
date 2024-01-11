@@ -45,10 +45,10 @@ function Navbar() {
                 {!context.loginUser && (
                     <>
                         <li>
-                            <Link to="/">Login  </Link>
+                            <Link to="/login">Login  </Link>
                         </li>
                         <li>
-                            <Link to="signup">Sign up  </Link>
+                            <Link to="/signup">Sign up  </Link>
                         </li>
                     </>
                 )

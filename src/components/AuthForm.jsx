@@ -3,7 +3,7 @@ import '@picocss/pico'
 import '../style/theme.css'
 import '../style/login.css'
 
-const AuthForm = ({ onFormSubmit, buttonText, isLogin }) => {
+const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -46,8 +46,8 @@ const AuthForm = ({ onFormSubmit, buttonText, isLogin }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (validateLogin()) {
-      onFormSubmit(username, password);
-
+      onFormSubmit(name, username, password);
+      //onInputNameChange(name);
       /* setUsername('');
       setPassword(''); */
     }
