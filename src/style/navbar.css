@@ -1,3 +1,5 @@
+@import url('./theme.css');
+
 .switch-theme {
     border-radius: 3.5rem;
 }
@@ -25,4 +27,33 @@
         font-size: 1rem;
         font-weight: bold;
     }
+}
+
+.toggle-menu {
+    display: none;
+    
+}
+
+@media (width <= 600px) {
+    .navbar {
+       display: none;
+    }
+    .toggle-menu {
+        display: block;
+        font-size: 2rem;
+        margin: 1.2rem 0 0 1.2rem;
+    }
+   .navbar.active {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       z-index: 1;
+       width: 100%;
+       border-radius: 3.5rem;
+       border-right: .1rem solid var(--primary);
+   }
+   .toggle-menu.active {
+    margin: 1.2rem 5rem 0 0;
+   }
 }

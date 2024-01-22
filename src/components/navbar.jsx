@@ -2,7 +2,9 @@ import '@picocss/pico'
 import '../style/navbar.css'
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import GhibliContext from '../context/ghibliContext'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoCloseOutline } from "react-icons/io5";
 
 const ToggleTheme = () => {
     const changeTheme = (e) => {
@@ -24,6 +26,19 @@ const ToggleTheme = () => {
 }
 
 function Navbar() {
+    const [toggle, setToggle] = useState(false);
+
+    function handleToggleMenu(e) {
+        console.log(e)
+        const menu = document.querySelector('.navbar');
+        const toggleMenu = document.querySelector('.toggle-menu');
+        menu.classList.toggle('active'); 
+        toggleMenu.classList.toggle('active'); 
+        setToggle(!toggle);
+        
+    }
+
+
     const context = useContext(GhibliContext);
 
     return (
@@ -57,7 +72,12 @@ function Navbar() {
                 <li>
                     <ToggleTheme />
                 </li>
+
+                
             </ul>
+          
+           {toggle ? <IoCloseOutline className='toggle-menu' onClick={ handleToggleMenu }/> :
+            <GiHamburgerMenu  className='toggle-menu' onClick={ handleToggleMenu }/> }
         </nav>
 
     )

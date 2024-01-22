@@ -54,16 +54,13 @@ del {
     .input-container {
         width: 100%;
     }
+    .input-container h2 {
+        margin-top: 15vh;
+    }
 
     .img-container {
         width: 80%;
         margin: 0 auto;
     }
 
-}
-
-@media (width < 1000px) {
-    form {
-        padding-top: 40vh;
-    }
 }
