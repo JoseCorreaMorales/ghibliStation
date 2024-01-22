@@ -1,7 +1,9 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, addDoc, disableNetwork } from "firebase/firestore";
 
-export async function createuser(name, username, password) {
+
+// TODO: CHECK IF USER EXISTS, chek fire rules for login componet 
+ export async function createuser(name, username, password) {
   try {
     const auth = getAuth();
     const db = getFirestore();
