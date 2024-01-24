@@ -85,47 +85,6 @@ const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
 
 export default AuthForm
 
-/* function AuthForm() {
-  const handleFormSubmit = (username, password) => {
-    console.log("data ", username, password);
-  }
-
-  return (
-    <>
-      <form action="" onSubmit={(e) => e.preventDefault()}>
-        <div data-theme="dark" className='container container-flex'>
-
-          <LoginInput onFormSubmit={handleFormSubmit} />
-
-          <Image />
-
-        </div>
-      </form>
-    </>
-  )
-} */
-
-
-
-
-/* try {
-    const auth = getAuth();
-    const signinMethod = await fetchSignInMethodsForEmail(auth, username);
-    if (signinMethod.length === 0) {
-      
-      setUserNotFound('User not found');
-      return;
-    } else {
-      const userCredential = await signInWithEmailAndPassword(auth, username, password);
-      userNotFound('');
-
-      console.log('Inicio de sesión exitoso. Usuario:', userCredential.user);
-    }
-
-
-  } catch (error) {
-    console.error(error);
-  } */
 
 
 

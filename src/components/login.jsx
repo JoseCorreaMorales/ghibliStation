@@ -10,8 +10,6 @@ import { app, firestore } from '../firebase/firebase'
 import { getAuth, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from 'firebase/auth' // for authentication
 
 
-//const context = useContext(GhibliContext);
-
 const Image = () => {
   return (
     <div className='img-container'>

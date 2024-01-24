@@ -1,5 +1,10 @@
 @import url('./theme.css');
 
+.navbar img {
+    height: 1.5rem;
+    margin-right: .5rem;
+}
+
 .switch-theme {
     border-radius: 3.5rem;
 }
@@ -17,16 +22,24 @@
 }
 
 .dark-mode-container {
-    margin-right: 2rem;
+    margin-right: 1rem;
+    padding: .5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    border-radius: 3rem;
 
     & > label {
         font-size: 1rem;
         font-weight: bold;
     }
+
+    & > input {
+        box-shadow: 11px 14px 47px -3px var(--primary);
+        -webkit-box-shadow: 11px 14px 47px -3px var(--primary);
+        -moz-box-shadow: 11px 14px 47px -3px var(--primary);
+      }
 }
 
 .toggle-menu {
@@ -55,5 +68,10 @@
    }
    .toggle-menu.active {
     margin: 1.2rem 5rem 0 0;
+   }
+
+   .dark-mode-container {
+    flex-direction: column;
+    margin: 0;
    }
 }

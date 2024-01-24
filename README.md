@@ -1,7 +1,7 @@
 # react-login-practice
  
 ## description
-This is a react + vite practice project for a login page using pico.css framework.
+This is a react + vite + Firebasase practice project for a login page and bring information about  Studio Ghibli (スタジオジブリ) movies using pico.css framework.
 
 
 ## Reference

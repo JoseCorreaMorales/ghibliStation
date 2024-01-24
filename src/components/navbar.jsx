@@ -2,25 +2,38 @@ import '@picocss/pico'
 import '../style/navbar.css'
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import GhibliContext from '../context/ghibliContext'
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseOutline } from "react-icons/io5";
+import totoro from '../assets/icons8-totoro.svg'
+import { BsMoonFill } from "react-icons/bs";
+import { MdSunny } from "react-icons/md";
 
 const ToggleTheme = () => {
+    const [theme, setTheme] = useState(localStorage.getItem('theme'));
+
+    useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+
+    }, [theme])
+
     const changeTheme = (e) => {
-        if (e.target.checked) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-        }
-        else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-        }
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        setTheme(newTheme);
     }
     return (
+        // TODO: change readOnly to checked
         <div className='dark-mode-container'>
-            <label htmlFor="dark-mode">Switch Theme</label>
-            <input type="checkbox" role="switch" id="terms" name="switch" onClick={changeTheme} />
+           { theme === 'light' ?  <MdSunny /> :  <BsMoonFill />}
+            <input 
+            type="checkbox"
+            role="switch"
+            id="theme-switch"
+            name="switch"
+            readOnly={theme === 'dark'}
+            onClick={changeTheme} />
         </div>
     )
 }
@@ -29,13 +42,11 @@ function Navbar() {
     const [toggle, setToggle] = useState(false);
 
     function handleToggleMenu(e) {
-        console.log(e)
         const menu = document.querySelector('.navbar');
         const toggleMenu = document.querySelector('.toggle-menu');
         menu.classList.toggle('active'); 
         toggleMenu.classList.toggle('active'); 
         setToggle(!toggle);
-        
     }
 
 
@@ -45,7 +56,8 @@ function Navbar() {
         <nav>
             <ul className='navbar'>
                 <li>
-                    <strong>Brand</strong>
+                    <img src={ totoro } alt="Navbar totoro icon" />
+                    <strong>Ghibli Station</strong>
                 </li>
 
                 {context.loginUser && (
