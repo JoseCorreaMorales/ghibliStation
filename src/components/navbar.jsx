@@ -8,6 +8,9 @@ import { IoCloseOutline } from "react-icons/io5";
 import totoro from '../assets/icons8-totoro.svg'
 import { BsMoonFill } from "react-icons/bs";
 import { MdSunny } from "react-icons/md";
+import Logout from './logout'; 
+import Login from './login';
+import GhibliHome from './ghibliHome';
 
 const ToggleTheme = () => {
     const [theme, setTheme] = useState(localStorage.getItem('theme'));
@@ -40,6 +43,9 @@ const ToggleTheme = () => {
 
 function Navbar() {
     const [toggle, setToggle] = useState(false);
+    const context = useContext(GhibliContext);
+    //const [isLoggedIn, setIsLoggedIn] = useState(context.userLogin);
+
 
     function handleToggleMenu(e) {
         const menu = document.querySelector('.navbar');
@@ -50,7 +56,11 @@ function Navbar() {
     }
 
 
-    const context = useContext(GhibliContext);
+    
+
+/*     useEffect(() => {
+        setIsLoggedIn(context.userLogin);
+    }, [context.userLogin]) */
 
     return (
         <nav>
@@ -60,22 +70,26 @@ function Navbar() {
                     <strong>Ghibli Station</strong>
                 </li>
 
-                {context.loginUser && (
+                {context.userLogin && (
                     <>
                         <li>
-                            <Link to="/home">Home  </Link>
+                            <Link to="/home" element={ <GhibliHome /> }>Home  </Link>
+                        </li>
+
+                        <li>
+                            <Link to="/logout" element={ <Logout /> }>Logout  </Link>
                         </li>
                     </>
                 )
                 }
 
-                {!context.loginUser && (
+                {!context.userLogin && (
                     <>
                         <li>
-                            <Link to="/login">Login  </Link>
+                            <Link to="/login">  </Link>
                         </li>
                         <li>
-                            <Link to="/signup">Sign up  </Link>
+                            <Link to="/signup">  </Link>
                         </li>
                     </>
                 )

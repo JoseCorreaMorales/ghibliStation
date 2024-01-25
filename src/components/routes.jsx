@@ -4,6 +4,7 @@ import GhibliContext from "../context/ghibliContext";
 
 import Login from "../components/login";
 import Signup from "../components/resgister";
+import Logout from "./logout";
 import GhibliHome from "../components/ghibliHome";
 
 export default function Rutas() {
@@ -14,18 +15,48 @@ export default function Rutas() {
           console.log("User login status:", context.userLogin);
 
           return (
-            <Routes>
+            
+            
+          <Routes>
+          {
+              !context.userLogin &&
+              <>
+                  <Route path="/" element={<Login />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/signup" element={<Signup />} /> 
+                  <Route path="/*" element={<Login />} />
+              </>}
+          {
+              context.userLogin &&
+              <>
               <Route path="/" element={<Navigate to="/login" />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route
-                path="/home"
-                element={context.userLogin ? <GhibliHome /> : <Navigate to="/login" />}
-              />
-            </Routes>
+              <Route path="/home" element={<GhibliHome />} />              
+              <Route path="/logout" element={<Logout />} />    
+              <Route path="/*" element={<GhibliHome />} />          
+              </>}
+      </Routes>  
+
+
+
+
           );
         }}
       </GhibliContext.Consumer>
     </GlobalState>
   );
 }
+
+{/* <Routes>
+              <Route path="/" element={<Navigate to="/login" />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/logout" element={<Logout />} />
+
+              <Route
+                path="/home"
+                element={context.userLogin ? <GhibliHome />  : <Navigate to="/login" />}
+              />
+            </Routes> */
+          
+          
+          }

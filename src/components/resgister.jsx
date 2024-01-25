@@ -23,8 +23,8 @@ function Signup() {
     try {
       const user = await createuser(name, username, password);
      
-      console.log("User created:", user.user.uid, user.user.email);      
       navigate("/home");
+      console.log("User created:");      
     } catch (error) {
       console.log("Error:", error);
     }

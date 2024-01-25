@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, Link } from "react-router-dom";
 import '@picocss/pico'
 import '../style/theme.css'
 import '../style/login.css'
+import { PiSignIn } from "react-icons/pi";
 
 const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
 
@@ -78,7 +79,10 @@ const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
       </div>
 
 
-      <button type='submit' onClick={handleFormSubmit}> { buttonText } </button>
+      <button type='submit' onClick={handleFormSubmit}>
+        <PiSignIn />   
+        { buttonText }
+      </button>
       {userNotFound && <del className='error'>{userNotFound}</del>}
 
       {isLogin ?  <Link to={"/signup"}>Don't have an account? </Link>  :  <Link to={"/login"}>Already been here? </Link>  }

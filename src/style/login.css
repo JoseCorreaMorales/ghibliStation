@@ -10,7 +10,9 @@ form {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    &  button svg {
+        margin-right: .5rem;
+    }
 }
 
 .input-container {
