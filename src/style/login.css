@@ -1,3 +1,4 @@
+@import url('./theme.css');
 .container-flex {
     display: flex;
     gap: 3rem;
@@ -20,6 +21,14 @@ form {
     flex-wrap: wrap;
     flex-direction: column;
    
+    & > a {
+        font-size: 1.2rem;
+        color: var(--primary-hover);
+
+        &:hover {
+            color: var(--primary-focus);
+        }
+    }
 }
 
 .input-item {
