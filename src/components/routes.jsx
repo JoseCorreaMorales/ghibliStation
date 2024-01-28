@@ -45,18 +45,3 @@ export default function Rutas() {
     </GlobalState>
   );
 }
-
-{/* <Routes>
-              <Route path="/" element={<Navigate to="/login" />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/logout" element={<Logout />} />
-
-              <Route
-                path="/home"
-                element={context.userLogin ? <GhibliHome />  : <Navigate to="/login" />}
-              />
-            </Routes> */
-          
-          
-          }

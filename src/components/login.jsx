@@ -32,7 +32,7 @@ const [userNotFound, setUserNotFound] = useState('');
          console.log('Inicio de sesión exitoso. Usuario:', userCredential.email);  
         loginUser(); 
         navigate('/home');
-
+        window.location.reload();
     } catch (error) {
       if (error.code === 'auth/invalid-credential') {
         console.warn('User not found');
