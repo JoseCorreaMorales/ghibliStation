@@ -49,9 +49,6 @@ const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
     e.preventDefault();
     if (validateLogin()) {
       onFormSubmit(name, username, password);
-      //onInputNameChange(name);
-      /* setUsername('');
-      setPassword(''); */
     }
   }
 

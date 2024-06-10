@@ -4,3 +4,17 @@
   box-sizing: border-box;
   overflow-x: hidden;
 }
+
+::-webkit-scrollbar{
+  background: transparent;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.71);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(0deg, rgba(255, 0, 0, 0.5), rgba(0, 0, 255, 0.5));
+}
