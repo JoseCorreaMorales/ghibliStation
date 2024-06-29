@@ -1,0 +1,67 @@
+.loading {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.films {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    column-gap: 2.5rem;
+}
+
+.film{
+    width: 20rem;
+    cursor: pointer;
+    max-height: 850px !important;
+    overflow-y: hidden;
+}
+
+.film img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.film hgroup {
+    overflow: hidden;
+    text-overflow: clip !important;
+    white-space: nowrap;
+
+    blockquote {
+        margin: .2rem;
+        padding: .2rem;
+    }
+}
+
+.film footer {
+    padding: 0rem;
+    padding: 1rem;
+}
+
+.film footer .footer-container{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: .5rem;
+
+    .footer-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.film footer .start {
+    width: 2rem;
+    color: rgba(255, 255, 0, 0.811);
+}
+
+.film footer .clock {
+    width: 2rem;
+}
