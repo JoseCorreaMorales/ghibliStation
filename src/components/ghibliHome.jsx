@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import "../style/home.css";
 import { FaStar } from 'react-icons/fa'
 import { FaClock } from "react-icons/fa";
+import { BiSolidTrain } from "react-icons/bi";
+import { IoFilter } from "react-icons/io5";
 
 const GhibliHome = () => {
     const [films, setFilms] = useState();
@@ -34,8 +36,23 @@ const GhibliHome = () => {
     }
     return (
         <>
+            <div className="title-container" role="group">
+                <BiSolidTrain />
+                <h1>Ghibi Station</h1>
+            </div>
+
+            <div className="search-container">
+                <form role="search">
+                    <input name="search" type="search" placeholder="Search" />
+                    <input type="submit" value="Search"  role="button" />
+                </form> 
+                <details className="outline contrast">
+                    <summary><IoFilter/></summary>
+                    <p>...</p>
+                </details>
+            </div>
+
             <main className="container-fluid">
-                <div>We are in GhibliHome</div>
                 <div className="films">
                     {films?.map((film) => {
                         return (
@@ -44,9 +61,9 @@ const GhibliHome = () => {
                                     <img src={film.image} alt=""  />
                                 </header>
                                 <hgroup>
-                                    <h3>{film.title}</h3>
+                                    <h3 title={film.title}>{film.title}</h3>
                                     <p>{film.original_title}</p>
-                                    <blockquote>
+                                    <blockquote title={film.description}>
                                         {film.description}                                        
                                     </blockquote> 
                                 </hgroup>

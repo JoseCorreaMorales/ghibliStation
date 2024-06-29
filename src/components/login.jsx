@@ -54,7 +54,7 @@ const [userNotFound, setUserNotFound] = useState('');
 
   return (
     <>
-      <form action="" onSubmit={(e) => e.preventDefault()}>
+      <form action="" onSubmit={(e) => e.preventDefault()} className='login-form'>
         <div data-theme="dark" className='container container-flex'>
 
           <AuthForm onFormSubmit={handleFormSubmit} buttonText={"Login"} isLogin={true} >
