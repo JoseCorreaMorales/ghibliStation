@@ -5,6 +5,8 @@
   overflow-x: hidden;
 }
 
+@import url('./style/theme.css');
+
 ::-webkit-scrollbar{
   background: transparent;
   width: 7px;
@@ -16,5 +18,5 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(0deg, rgba(255, 0, 0, 0.5), rgba(0, 0, 255, 0.5));
+  background: linear-gradient(0deg, var(--primary), var(--secondary));
 }
