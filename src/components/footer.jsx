@@ -1,6 +1,15 @@
 import React from 'react'
 import Image from '../assets/icons8-totoro.svg'
 import House from '../assets/house.png'
+import { FaFacebook } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FiInstagram } from "react-icons/fi";
+import { RiMovie2Line } from "react-icons/ri";
+import { FaInfo } from "react-icons/fa";
+import { SlEnvolopeLetter } from "react-icons/sl";
+import { PiMailbox } from "react-icons/pi";
+import { CiPhone } from "react-icons/ci";
+import { BiStreetView } from "react-icons/bi";
 
 export default function Footer(props) {
 
@@ -18,23 +27,23 @@ export default function Footer(props) {
 
                     <div className='footer-info'>
                         <h5>Pages</h5>
-                        <p>Movies</p>
-                        <p>About</p>
-                        <p>Contact</p>
+                        <p><RiMovie2Line /> Movies</p>
+                        <p><FaInfo /> About</p>
+                        <p><SlEnvolopeLetter /> Contact</p>
                     </div>
 
                     <div className='footer-info'>
-                        <h5>Social Media</h5>
-                        <p>Facebook</p>
-                        <p>Twitter</p>
-                        <p>Instagram</p>
+                        <h5> Social Media</h5>
+                        <p><FaFacebook /> Facebook</p>
+                        <p><FaXTwitter /> Twitter</p>
+                        <p><FiInstagram />Instagram</p>
                     </div>
 
                     <div className='footer-info'>
-                        <h5>Contacto</h5>
-                        <p>info@ghiblistation.com</p>
-                        <p>+1 123 456 7890</p>
-                        <p>1 Totoro Lane, <strong>Bosque de Niebla</strong>, <br /> Valle del Viento, Fantasía</p>
+                        <h5> Contacto</h5>
+                        <p><PiMailbox /> info@ghiblistation.com</p>
+                        <p><CiPhone /> +1 123 456 7890</p>
+                        <p><BiStreetView /> 1 Totoro Lane, <strong>Bosque de Niebla</strong>, <br /> Valle del Viento, Fantasía</p>
                     </div>
                 <img src={House} className='bottom-totoro' alt="" />
                 </div>

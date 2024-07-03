@@ -1,3 +1,4 @@
+@import url('./style/theme.css');
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +6,6 @@
   overflow-x: hidden;
 }
 
-@import url('./style/theme.css');
 
 ::-webkit-scrollbar{
   background: transparent;
