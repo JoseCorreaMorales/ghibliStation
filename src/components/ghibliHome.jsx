@@ -8,23 +8,25 @@ import { BiSolidTrain } from "react-icons/bi";
 import Search from "./search";
 import Footer from "./footer"
 import { IoFilter } from "react-icons/io5";
-import { CgLayoutGrid } from "react-icons/cg";
+import { FaSortAlphaDown } from "react-icons/fa";
+import { FaSortAlphaDownAlt } from "react-icons/fa";
 
 const GhibliHome = () => {
     const [films, setFilms] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchText, setSearchText] = useState("")
     const [searchResults, setSearchResults] = useState([])
+    const [directors, setDirectors] = useState([])
 
     useEffect(() => {
         async function fetchFilms() {
             try {
-                const response = await axios.get(
-                    import.meta.env.VITE_BASE_URL + `/films`
-                );
+                const response = await axios.get(import.meta.env.VITE_BASE_URL + `/films`);
                 setFilms(response.data);
-                setSearchResults([...response.data]);   
+                setSearchResults([...response.data]);
                 setLoading(false);
+                const uniqueDirectors = [... new Set(response.data.map((film) => film.director))];
+                setDirectors(uniqueDirectors);
             } catch (error) {
                 console.error("Error fetching data: ", error);
             }
@@ -38,11 +40,37 @@ const GhibliHome = () => {
         setSearchText(text);
         if (text === "") {
             setFilms([...searchResults]);
+            setSearchText("")
         } else {
-            setFilms(searchResults.filter((film) => 
+            setFilms(searchResults.filter((film) =>
                 film.title.toLowerCase().includes(text)
             ));
         }
+    }
+
+    const sortMovies = (order) => {
+        const sortedFilms = [...films].sort((a, b) => {
+            if (a.title.toLowerCase() < b.title.toLowerCase()) {
+                return order === 'asc' ? -1 : 1;
+            }
+            if (a.title.toLowerCase() > b.title.toLowerCase()) {
+                return order === 'asc' ? 1 : -1;
+            }
+            return 0;
+        });
+        setFilms(sortedFilms);
+    }
+
+    const handleSeletedDirector = (e) => {
+        let director = e.target.value
+        const filteredFilms = films.filter((film) => film.director === director);
+        
+        if (filteredFilms.length > 0) {
+        setFilms(filteredFilms);            
+        } else {
+            // regresar a la lista original
+            setFilms(searchResults);
+        }        
     }
 
     if (loading) {
@@ -68,7 +96,33 @@ const GhibliHome = () => {
                 </form>
                 <details className="outline contrast">
                     <summary><IoFilter /></summary>
-                    <p>...</p>
+                    <div className="filter-movies">
+
+                        <div className="filter-movies--director">
+                            <select
+                                name="filter director"
+                                aria-label="Select your favorite director..."
+                                onChange={ handleSeletedDirector }
+                            >
+                                <option onClick={() =>  {} }>Select your favorite director...</option>
+                                {directors?.map((director) => (
+                                    <option
+                                        key={director}
+                                        value={director}
+                                        onClick={() => {}}
+                                    >
+                                        {director}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="filter-movies--sort">
+                            <FaSortAlphaDown onClick={() => sortMovies('asc')} />
+                            <FaSortAlphaDownAlt onClick={() => sortMovies('desc')} />
+                        </div>
+
+                    </div>
                 </details>
             </div>
 

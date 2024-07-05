@@ -47,6 +47,37 @@
         }
     }
 
+    .filter-movies {
+        display: flex;
+        /* justify-content: space-evenly; */
+        justify-content: space-between;
+        align-content: center;
+       
+
+        .filter-movies--sort {
+            display: flex;
+            gap: 1rem;
+            margin-right: .5rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .filter-movies--director {
+            padding: .2rem;
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            @media (max-width: 768px) {
+                width: 80%;
+                
+            }
+        }
+
+
+    }
+
     @media (max-width: 768px) {
         width: 80%;
     }
