@@ -6,6 +6,7 @@ import Login from "../components/login";
 import Signup from "../components/resgister";
 import Logout from "./logout";
 import GhibliHome from "../components/ghibliHome";
+import Movie from "../components/movie";
 
 export default function Rutas() {
   return (
@@ -31,6 +32,7 @@ export default function Rutas() {
               <>
               <Route path="/" element={<Navigate to="/login" />} />
               <Route path="/home" element={<GhibliHome />} />              
+              <Route path="/movie/:id" element={<Movie />} />              
               <Route path="/logout" element={<Logout />} />    
               <Route path="/*" element={<GhibliHome />} />          
               </>}

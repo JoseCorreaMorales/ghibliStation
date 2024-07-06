@@ -10,6 +10,7 @@ import Footer from "./footer"
 import { IoFilter } from "react-icons/io5";
 import { FaSortAlphaDown } from "react-icons/fa";
 import { FaSortAlphaDownAlt } from "react-icons/fa";
+import { Link } from 'react-router-dom'
 
 const GhibliHome = () => {
     const [films, setFilms] = useState([]);
@@ -131,28 +132,30 @@ const GhibliHome = () => {
                     {films && films.map((film) => {
                         return (
                             <article className="film" key={film.id}>
-                                <header>
-                                    <img src={film.image} alt="" />
-                                </header>
-                                <hgroup>
-                                    <h3 title={film.title}>{film.title}</h3>
-                                    <p>{film.original_title}</p>
-                                    <blockquote title={film.description}>
-                                        {film.description}
-                                    </blockquote>
-                                </hgroup>
-                                <footer>
-                                    <div className="footer-container">
-                                        <div className="footer-item">
-                                            < FaStar className="start" />
-                                            {film.rt_score}</div>
-                                        <div className="footer-item">
-                                            < FaClock className="clock" />
-                                            {film.running_time} m
+                            <Link to={`/movie/${film.id}`}>
+                                    <header>
+                                        <img src={film.image} alt="" />
+                                    </header>
+                                    <hgroup>
+                                        <h3 title={film.title}>{film.title}</h3>
+                                        <p>{film.original_title}</p>
+                                        <blockquote title={film.description}>
+                                            {film.description}
+                                        </blockquote>
+                                    </hgroup>
+                                    <footer>
+                                        <div className="footer-container">
+                                            <div className="footer-item">
+                                                < FaStar className="start" />
+                                                {film.rt_score}</div>
+                                            <div className="footer-item">
+                                                < FaClock className="clock" />
+                                                {film.running_time} m
+                                            </div>
                                         </div>
-                                    </div>
-                                </footer>
-                            </article>
+                                    </footer>
+                            </Link>
+                                </article>
                         );
                     })}
                 </div>
