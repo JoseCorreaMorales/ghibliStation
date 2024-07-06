@@ -7,7 +7,7 @@
     height: 100vh;
 }
 
-.movie-container {
+.movie-banner-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +16,7 @@
 
     img {
 
-        border-radius: 2rem;
+        border-radius: 1.5rem;
         border-end-end-radius: 0;
         border-bottom-left-radius: 0;
         height: 80vh; /* 50 70 */
@@ -42,7 +42,7 @@
         height: 80vh; /* 50 70 */
         width: 100vw;
         transform: translate(-50%, -50%);
-        border-radius: 2rem;
+        border-radius: 1.5rem;
         border-end-end-radius: 0;
         border-bottom-left-radius: 0;
 
@@ -59,9 +59,9 @@
     }
 
     div:hover::after {
-        content: "name";
+        content: attr(data-title);
         position: absolute;
-        top: 90%;
+        top: 85%;
         left: 50%;
         transform: translate(-50%, -50%);
         color: var(--primary);
@@ -69,5 +69,22 @@
         font-weight: 600;
         text-align: center;
         /* text-transform: uppercase; */
+    }
+}
+
+.movie-details {
+    width: 85%;
+    margin: 2.5rem auto;
+    margin-bottom: 4rem;
+
+
+
+    .details {
+        margin-top: 3.5rem;
+
+        svg {
+            margin-bottom: 0.5rem;
+            margin-right: .5rem;
+        }
     }
 }

@@ -1,12 +1,19 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import '../style/movie.css'
+import { GiDirectorChair } from "react-icons/gi";
+import { CiCalendar } from "react-icons/ci";
+import { CiTimer } from "react-icons/ci";
+import { CiStar } from "react-icons/ci";
+import { RiMovie2Line } from "react-icons/ri";
+
 
 export default function Movie(props) {
   const { id } = useParams();  
     const [movieDetails, setMovieDetails] = useState([]);
     const [loading, setLoading] = useState(true);
+    const romanisedTitleRef = useRef(null)
     
     /* 
     {
@@ -47,6 +54,14 @@ export default function Movie(props) {
         fetchMovie()
     }, [id]);
     
+    useEffect(() => {
+        if (movieDetails && romanisedTitleRef.current) {
+            romanisedTitleRef.current.setAttribute('data-title',
+                movieDetails.original_title_romanised
+            )
+        }
+    }, [movieDetails])
+
 
     if (loading) {
         return (
@@ -61,17 +76,24 @@ export default function Movie(props) {
     return (
         <>
             <main className="container-fliud">
-                <picture className='movie-container'>
-                    <div>
-                    </div>
+                <picture className='movie-banner-container'>
+                    <div ref={romanisedTitleRef}></div>
                         <img src={movieDetails.movie_banner} alt="" />
                     </picture>
                     
-
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto tempore recusandae quas neque molestias, repudiandae illo velit nulla debitis, a, modi cupiditate. Quas quae vel qui error nobis eius ducimus.
-            Beatae, tempore dolorum numquam, excepturi vel earum cumque, ab suscipit libero asperiores nam harum deleniti aut ipsum ea facilis minus quaerat debitis explicabo maxime! Quisquam minus similique deserunt est officiis?
-            Rerum laboriosam cumque corrupti quos aliquam dicta, voluptatum distinctio? Enim repellat cumque a sequi numquam explicabo! Quia, similique? Incidunt voluptas nam sunt perferendis laboriosam inventore debitis atque tenetur consequatur! Vitae.
-            Inventore tempore nulla nesciunt consequatur! Fugiat provident quidem et ex doloribus perferendis! Neque odio dignissimos reiciendis? Deleniti, dolore maiores! Dolore libero quia laboriosam cum saepe provident aut doloribus fugiat maiores!</p>
+                <section className="movie-details">
+                    <h1>{movieDetails.title}</h1>
+                    <p>{movieDetails.description}</p>
+                    <div className="details">
+                        <p><GiDirectorChair /> <strong>Director: </strong>{movieDetails.director}.</p>
+                        <p><RiMovie2Line /><strong>Producer(s):</strong> {movieDetails.producer}.</p>
+                        <p><CiCalendar /><strong>Release Date:</strong> {movieDetails.release_date}.</p>
+                        <p><CiTimer /><strong>Running Time:</strong> {movieDetails.running_time} mins.</p>
+                        <p><CiStar /><strong>Rotten Tomatoes Score:</strong> {movieDetails.rt_score}%.</p>
+                    </div>
+                </section>
+            
+                
             </main>            
 
         </>

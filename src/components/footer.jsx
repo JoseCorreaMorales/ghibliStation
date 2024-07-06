@@ -40,10 +40,10 @@ export default function Footer(props) {
                     </div>
 
                     <div className='footer-info'>
-                        <h5> Contacto</h5>
+                        <h5> Contact</h5>
                         <p><PiMailbox /> info@ghiblistation.com</p>
                         <p><CiPhone /> +1 123 456 7890</p>
-                        <p><BiStreetView /> 1 Totoro Lane, <strong>Bosque de Niebla</strong>, <br /> Valle del Viento, Fantasía</p>
+                        <p><BiStreetView /> 1 Totoro Lane, <strong>Fog Forest</strong>, <br /> Valley of the Wind, Fantasy</p>
                     </div>
                 <img src={House} className='bottom-totoro' alt="" />
                 </div>
