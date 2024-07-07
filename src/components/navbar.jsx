@@ -10,6 +10,8 @@ import { BsMoonFill } from "react-icons/bs";
 import { MdSunny } from "react-icons/md";
 import Logout from "./logout";
 import GhibliHome from "./ghibliHome";
+import Profile from "./profile";
+import Favorites from "./favorites";
 
 
 const ToggleTheme = () => {
@@ -77,6 +79,16 @@ function Navbar() {
                     <li>
                       <Link to="/logout" element={<Logout />}>
                         Logout{" "}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/profile" element={<Profile />}>
+                        Profile{" "}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/favorites" element={<Favorites />}>
+                        Favorites{" "}
                       </Link>
                     </li>
                   </>

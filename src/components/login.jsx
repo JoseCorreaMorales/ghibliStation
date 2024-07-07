@@ -30,7 +30,8 @@ const [userNotFound, setUserNotFound] = useState('');
 
       const userCredential = await signInWithEmailAndPassword(auth, username, password);
          console.log('Inicio de sesión exitoso. Usuario:', userCredential.email);  
-        loginUser(); 
+        const user = userCredential.user         
+      loginUser({ email: user.email, uid: user.uid }); 
         navigate('/home');
         window.location.reload();
     } catch (error) {

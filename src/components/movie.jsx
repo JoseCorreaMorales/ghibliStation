@@ -7,7 +7,10 @@ import { CiCalendar } from "react-icons/ci";
 import { CiTimer } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
 import { RiMovie2Line } from "react-icons/ri";
-
+import { MdFavoriteBorder } from "react-icons/md";
+import {create, createFavorite } from '../services/favoriteMoviesService'
+import { useContext } from 'react';
+import GhibliContext from '../context/ghibliContext';
 
 export default function Movie(props) {
   const { id } = useParams();  
@@ -15,6 +18,8 @@ export default function Movie(props) {
     const [loading, setLoading] = useState(true);
     const romanisedTitleRef = useRef(null)
     
+    const { userCredentials } = useContext(GhibliContext);
+
     /* 
     {
     id: '86e544fd-79de-4e04-be62-5be67d8dd92e',
@@ -46,14 +51,15 @@ export default function Movie(props) {
                 const response = await axios.get(import.meta.env.VITE_BASE_URL + `/films/${id}`);
                 setMovieDetails(response.data);
                 setLoading(false)
-                console.log(response.data);
+                //console.log(response.data);
+                console.log(userCredentials);
             } catch (error) {
                 console.error("Error fetching data: ", error);
             }
         }
         fetchMovie()
     }, [id]);
-    
+        
     useEffect(() => {
         if (movieDetails && romanisedTitleRef.current) {
             romanisedTitleRef.current.setAttribute('data-title',
@@ -61,6 +67,29 @@ export default function Movie(props) {
             )
         }
     }, [movieDetails])
+
+    const handleAddFavorite = async () => {
+        const { uid } = userCredentials;
+        const {id, title, description, director, producer, release_date, running_time, rt_score, movie_banner } = movieDetails;
+        const payload = {
+            id,
+            title,
+            description,
+            director,
+            producer,
+            release_date,
+            running_time,
+            rt_score,
+            movie_banner
+        }
+
+        try {
+            await createFavorite(uid, payload)
+            console.log('Favorite added successfully')
+        } catch (error) {
+            console.error('Error adding favorite: ', error)
+        }
+     }
 
 
     if (loading) {
@@ -82,7 +111,10 @@ export default function Movie(props) {
                     </picture>
                     
                 <section className="movie-details">
-                    <h1>{movieDetails.title}</h1>
+                    <div className='movie-details--title' onClick={handleAddFavorite}>
+                        <h1>{movieDetails.title}</h1>
+                        <MdFavoriteBorder />
+                    </div>
                     <p>{movieDetails.description}</p>
                     <div className="details">
                         <p><GiDirectorChair /> <strong>Director: </strong>{movieDetails.director}.</p>

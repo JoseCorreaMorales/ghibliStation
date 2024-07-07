@@ -7,6 +7,8 @@ import Signup from "../components/resgister";
 import Logout from "./logout";
 import GhibliHome from "../components/ghibliHome";
 import Movie from "../components/movie";
+import Profile from "../components/profile";
+import Favorites from "../components/favorites";
 
 export default function Rutas() {
   return (
@@ -14,6 +16,7 @@ export default function Rutas() {
       <GhibliContext.Consumer>
         {(context) => {
           console.log("User login status:", context.userLogin);
+          //console.log("User login status:", context.isLogin);
 
           return (
             
@@ -21,6 +24,7 @@ export default function Rutas() {
           <Routes>
           {
               !context.userLogin &&
+              //!context.isLogin &&
               <>
                   <Route path="/" element={<Login />} />
                   <Route path="/login" element={<Login />} />
@@ -28,11 +32,15 @@ export default function Rutas() {
                   <Route path="/*" element={<Login />} />
               </>}
           {
-              context.userLogin &&
+                context.userLogin &&
+                //context.isLogin &&
+                
               <>
               <Route path="/" element={<Navigate to="/login" />} />
               <Route path="/home" element={<GhibliHome />} />              
               <Route path="/movie/:id" element={<Movie />} />              
+              <Route path="/profile" element={<Profile />} />              
+              <Route path="/favorites" element={<Favorites />} />              
               <Route path="/logout" element={<Logout />} />    
               <Route path="/*" element={<GhibliHome />} />          
               </>}
