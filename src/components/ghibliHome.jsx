@@ -147,7 +147,7 @@ const GhibliHome = () => {
                                         <div className="footer-container">
                                             <div className="footer-item">
                                                 < FaStar className="start" />
-                                                {film.rt_score}</div>
+                                                {film.rt_score}%</div>
                                             <div className="footer-item">
                                                 < FaClock className="clock" />
                                                 {film.running_time} m

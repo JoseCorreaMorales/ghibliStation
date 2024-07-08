@@ -104,6 +104,10 @@
     overflow-y: hidden;
 }
 
+.film a {
+    text-decoration: none;
+}
+
 .film img {
     width: 100%;
     height: 100%;

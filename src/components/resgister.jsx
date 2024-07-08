@@ -19,12 +19,15 @@ const Image = () => {
 
 function Signup() {
   const navigate = useNavigate();
+  const { loginUser } = useContext(GhibliContext);
   async function handleFormSubmit(name, username, password) {
     try {
-      const user = await createuser(name, username, password);
-     
+      const userCredential = await createuser(name, username, password);
+      const userData = userCredential.user
+      loginUser({ email: userData.email, uid: userData.uid });
       navigate("/home");
-      console.log("User created:");      
+      window.location.reload();
+      console.log("User created:", userData.email, userData.uid);      
     } catch (error) {
       console.log("Error:", error);
     }

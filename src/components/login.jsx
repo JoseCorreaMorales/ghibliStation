@@ -6,7 +6,6 @@ import '../style/theme.css'
 import '../style/login.css'
 import loginImg from '../assets/loginImg.svg'
 import AuthForm from './AuthForm'
-import { app, firestore } from '../firebase/firebase'
 import { getAuth, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from 'firebase/auth' // for authentication
 
 
