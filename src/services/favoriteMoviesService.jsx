@@ -1,5 +1,5 @@
 import { app } from '../firebase/firebase';
-import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, doc, setDoc, getDocs } from "firebase/firestore";
 
 
 export async function create(payload) {
@@ -21,6 +21,27 @@ export const createFavorite = async (userId, movie) => {
         console.error("Error adding favorite: ", error);
     }
 };
+
+
+export const getFavorites = async (userId) => {
+    try {
+        // Obtén una referencia a la subcolección "favorites" del usuario
+        const favoritesCollectionRef = collection(db, "users", userId, "favorites");
+
+        // Obtén los documentos de la subcolección "favorites"
+        const querySnapshot = await getDocs(favoritesCollectionRef);
+
+        // Mapea los documentos obtenidos a un arreglo de objetos
+        const favorites = querySnapshot.docs.map(doc => doc.data());
+
+        return favorites;
+    } catch (error) {
+        console.error("Error getting favorites: ", error);
+        throw new Error("Error getting favorites");
+    }
+};
+
+
 
 /* 
 export async function createFavorite(data) {

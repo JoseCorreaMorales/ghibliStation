@@ -9,6 +9,7 @@ export default function Profile(props) {
     const { userCredentials } = useContext(GhibliContext);
     const { uid, email } = userCredentials
     const [username, setusername] = useState("")
+    let viewUid = uid.slice(0, 9)
 
     useEffect(() => {
         const fetchUsername = async () => {
@@ -30,12 +31,13 @@ export default function Profile(props) {
                             <img src={avatar} alt="" />
                         </picture>
                         <h1>Welcome back! <strong> {username}</strong></h1>
+                        <small>{ viewUid }....</small>
                     </div>                    
                 </article>
                 <hr />
 
                 <section className='user-info-container'>
-                    <p><strong>Your Email </strong>: {email}</p>
+                    <p><strong>Your Email</strong>: {email}</p>
 
                 </section>
 
