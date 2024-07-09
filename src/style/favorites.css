@@ -32,3 +32,15 @@
         width: 90%;
     }
 }
+
+.favorite {
+    position: relative;
+
+    svg {
+        position: absolute;
+        left: 85%;
+        top: 5%;
+        font-size: 2rem;
+        color: var(--primary);
+    }
+}

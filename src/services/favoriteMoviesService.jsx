@@ -1,5 +1,5 @@
 import { app } from '../firebase/firebase';
-import { getFirestore, collection, addDoc, doc, setDoc, getDocs } from "firebase/firestore";
+import { getFirestore, collection, addDoc, doc, setDoc, getDocs, deleteDoc } from "firebase/firestore";
 
 
 export async function create(payload) {
@@ -32,7 +32,11 @@ export const getFavorites = async (userId) => {
         const querySnapshot = await getDocs(favoritesCollectionRef);
 
         // Mapea los documentos obtenidos a un arreglo de objetos
-        const favorites = querySnapshot.docs.map(doc => doc.data());
+        const favorites = querySnapshot.docs.map(doc => ({
+            docId: doc.id,
+            ...doc.data()
+        
+        }));
 
         return favorites;
     } catch (error) {
@@ -40,6 +44,21 @@ export const getFavorites = async (userId) => {
         throw new Error("Error getting favorites");
     }
 };
+
+export const removeFavorite = async (userId, movieId) => {
+    try {
+        // Obtén una referencia al documento del favorito
+        const favoriteRef = doc(db, "users", userId, "favorites", movieId);
+
+        // Elimina el documento del favorito
+        await deleteDoc(favoriteRef);
+
+        console.log("Favorite removed successfully");
+    } catch (error) {
+        console.error("Error removing favorite: ", error);
+        throw new Error("Error removing favorite");
+    }
+}
 
 
 
