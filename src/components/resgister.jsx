@@ -7,7 +7,7 @@ import "../style/login.css";
 import loginImg from "../assets/loginImg.svg";
 import AuthForm from "./AuthForm";
 import { createuser } from "../services/usersServices";
-
+import { ThreeDModel } from './login'
 
 const Image = () => {
   return (
@@ -41,7 +41,8 @@ function Signup() {
             buttonText={"Sign-up"}
             isLogin={false}
           ></AuthForm>
-          <Image />
+          {/* <Image /> */}
+            <ThreeDModel />
         </div>
       </form>
     </>

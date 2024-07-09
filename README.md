@@ -23,7 +23,17 @@ Explore, discover, and immerse yourself in a universe where cats transform into 
 ## Design
 - [Figma](https://www.figma.com/design/9jOJ4yj9hemH6kxBP1tl7u/GHibli-Station?node-id=0-1&t=ncPqI2BryctaZ9OA-1)
 
+## Commands
 
+### Install dependencies
+```bash
+gltf-pipeline -i model-name.glb -o model-optimized.glb
+```
+
+### Convert to JSX
+```bash
+npx gltfjsx model-optimized.glb
+```
 
 ## Contact
 

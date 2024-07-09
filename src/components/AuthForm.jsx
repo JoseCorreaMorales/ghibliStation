@@ -53,9 +53,8 @@ const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
   }
 
   return (
-    <div className='input-container'>
-      {!isLogin ? <h2>Hey, join us!</h2> : <h2>Welcome back!</h2>}
-
+    <div className={`input-container ${isLogin ? 'login-space' : ''}`}>
+      {!isLogin ? <h2 className={isLogin ? 'title-login' : 'title-sign-in'}>Hey, join us!</h2> : <h2>Welcome back!</h2>}
       {
       !isLogin && <div className='input-item'>                
         <label htmlFor="name">Name</label>
@@ -76,7 +75,7 @@ const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
       </div>
 
 
-      <button type='submit' onClick={handleFormSubmit}>
+      <button type='submit' onClick={handleFormSubmit} data-tooltip="Welcome! 🎉" data-placement="bottom">
         <PiSignIn />   
         { buttonText }
       </button>

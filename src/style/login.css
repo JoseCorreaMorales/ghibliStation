@@ -57,13 +57,31 @@ del {
     text-align: center;
 }
 
+.model-container {
+    width: 50%;
+}
+
 @media (max-width: 1000px) {
     .container-flex {
         flex-direction: column;
     }
 
+    .title-login {
+        margin-top: calc(10vh - 1.2rem);
+    }
+
+    .model-container {
+        width: 100%;
+        height: 50vh;
+    }
+
+    .login-space {
+        margin-top: 40vh;
+    }
+
     .input-container {
         width: 100%;
+        /* margin-top: calc(10vh - 3rem); */
     }
     .input-container h2 {
         margin-top: 15vh;
