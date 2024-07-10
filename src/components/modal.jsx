@@ -1,20 +1,30 @@
 import React from 'react';
-import { createFavorite, isOnFavorite } from '../services/favoriteMoviesService';
+import { createFavorite, removeFavorite } from '../services/favoriteMoviesService';
+import { MdFileDownloadDone } from "react-icons/md";
+import { CiCircleRemove } from "react-icons/ci";
 
 export default function Modal({ isOpen, movieDetails, onClose, credentials, existOnFavorite, setIsModalOpen, setExistOnFavorite }) {
     const { uid } = credentials;
-    const { id, title, description, director, producer, release_date, running_time, rt_score, movie_banner } = movieDetails;
-    const payload = { id, title, description, director, producer, release_date, running_time, rt_score, movie_banner };
 
     const handleAddOrDeleteFavorite = async () => {
         try {
             if (existOnFavorite) {
-                // its already on favorites list then remove it
-                await removeFavorite(uid, id);
                 setIsModalOpen(false);
                 setExistOnFavorite(false);
+                await removeFavorite(uid, movieDetails.docId);
+                window.location.reload();
             } else {
-                // its not on favorites list yet then add it
+                const payload = {
+                    id: movieDetails.id,
+                    title: movieDetails.title,
+                    description: movieDetails.description,
+                    director: movieDetails.director,
+                    producer: movieDetails.producer,
+                    release_date: movieDetails.release_date,
+                    running_time: movieDetails.running_time,
+                    rt_score: movieDetails.rt_score,
+                    movie_banner: movieDetails.movie_banner
+                };
                 await createFavorite(uid, payload);
                 setIsModalOpen(false);
                 setExistOnFavorite(true);
@@ -24,24 +34,36 @@ export default function Modal({ isOpen, movieDetails, onClose, credentials, exis
         }
     };
 
-    if (!isOpen) return null;
+    if (!isOpen || !movieDetails) return null; // Asegúrarse de que movieDetails no sea null
 
     return (
         <dialog open>
             <article>
-                <h2>Are you sure you want to add <strong>{title}</strong> to your favorites list?</h2>
+                <h2>Are you sure you want to
+                    <strong className='modal-action'>
+                        {existOnFavorite ? ' remove' : ' add'}
+                    </strong>
+                    <strong className='modal-title'>
+                        {movieDetails.title}
+                        {/* ... */}
+                    </strong>?
+                </h2>
                 <ul>
-                    <li><strong>Director:</strong> {director}</li>
-                    <li><strong>Producer:</strong> {producer}</li>
-                    <li><strong>Release Date:</strong> {release_date}</li>
-                    <li><strong>Running Time:</strong> {running_time} mins</li>
-                    <li><strong>Rotten Tomatoes Score:</strong> {rt_score}%</li>
+                    <li><strong>Director:</strong> {movieDetails.director}</li>
+                    <li><strong>Producer:</strong> {movieDetails.producer}</li>
+                    <li><strong>Release Date:</strong> {movieDetails.release_date}</li>
+                    <li><strong>Running Time:</strong> {movieDetails.running_time} mins</li>
+                    <li><strong>Rotten Tomatoes Score:</strong> {movieDetails.rt_score}%</li>
                 </ul>
                 <footer>
                     <button onClick={onClose} className="secondary">
                         Cancel
                     </button>
                     <button onClick={handleAddOrDeleteFavorite}>
+                        {existOnFavorite ?
+                            <CiCircleRemove /> :
+                            <MdFileDownloadDone />
+                        }
                         Confirm
                     </button>
                 </footer>

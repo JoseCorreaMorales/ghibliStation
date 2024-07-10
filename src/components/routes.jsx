@@ -16,8 +16,6 @@ export default function Rutas() {
       <GhibliContext.Consumer>
         {(context) => {
           console.log("User login status:", context.userLogin);
-          //console.log("User login status:", context.isLogin);
-
           return (
             
             
@@ -33,8 +31,6 @@ export default function Rutas() {
               </>}
           {
                 context.userLogin &&
-                //context.isLogin &&
-                
               <>
               <Route path="/" element={<Navigate to="/login" />} />
               <Route path="/home" element={<GhibliHome />} />              

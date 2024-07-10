@@ -1,6 +1,4 @@
 @import url('./theme.css');
-
-
     .title {
         background: linear-gradient(135deg, #A8E6CF, #DCEDC1, #FFD3B6, #FFAAA5);
             color: transparent;
@@ -18,9 +16,6 @@
                 background-clip: text;
             }
     }
-.films {
-}
-
 .film {
     padding-bottom: 0;
 

@@ -22,29 +22,7 @@ export default function Movie(props) {
     const [existOnFavorite, setExistOnFavorite] = useState(null);
     const { userCredentials } = useContext(GhibliContext);
     const { uid } = userCredentials;
-    /* 
-    {
-    id: '86e544fd-79de-4e04-be62-5be67d8dd92e',
-    title: 'Nausicaä of the Valley of the Wind',
-    original_title: '風の谷のナウシカ',
-    original_title_romanised: 'Kaze no Tani no Naushika',
-    image: 'https://www.themoviedb.org/t/p/original/tcrkfB8SRPQCgwI88hQScua6nxh.jpg',
-    movie_banner: 
-      'https://www.themoviedb.org/t/p/original/ulVUa2MvnJAjAeRt7h23FFJVRKH.jpg',
-    description: 
-      'Warrior and pacifist Princess Nausicaä desperately struggles to prevent two warring nations from destroying themselves and their dying planet.',
-    director: 'Hayao Miyazaki',
-    producer: 'Isao Takahata',
-    release_date: '1984',
-    running_time: '117',
-    rt_score: '89',
-    people: [ 'https://ghibliapi.dev/people/' ],
-    species: [ 'https://ghibliapi.dev/species/' ],
-    locations: [ 'https://ghibliapi.dev/locations/' ],
-    vehicles: [ 'https://ghibliapi.dev/vehicles/' ],
-    url: 'https://ghibliapi.dev/films/86e544fd-79de-4e04-be62-5be67d8dd92e'
-  }
-    */
+
 
     useEffect(() => {
         async function fetchMovie() {
@@ -53,7 +31,7 @@ export default function Movie(props) {
                 setMovieDetails(response.data);
                 const exist = await isOnFavorite(uid, id);
                 setExistOnFavorite(exist);
-                console.log(existOnFavorite)
+                //console.log(existOnFavorite)
                 setLoading(false)
 
             } catch (error) {
@@ -71,38 +49,9 @@ export default function Movie(props) {
             )
         }
     }, [movieDetails])
-
-  /*   const handleAddFavorite = async () => {
-        const { uid } = userCredentials;
-        const { id, title, description, director, producer, release_date, running_time, rt_score, movie_banner } = movieDetails;
-        const payload = {
-            id,
-            title,
-            description,
-            director,
-            producer,
-            release_date,
-            running_time,
-            rt_score,
-            movie_banner
-        }
-        try {
-            if (existOnFavorite) {
-                return;
-            }
-            else {
-                await createFavorite(uid, payload)
-                console.log('Favorite added successfully')
-                setIsModalOpen(false)
-                setExistOnFavorite(true)
-            }
-        } catch (error) {
-            console.error('Error adding favorite: ', error)
-        }
-    } */
-    const handleModalOpen = () => {
-        setIsModalOpen(true);
-    };
+    
+    
+    const handleModalOpen = () => setIsModalOpen(true)
 
     if (loading) {
         return (

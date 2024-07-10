@@ -56,10 +56,9 @@ const [userNotFound, setUserNotFound] = useState('');
   async function handleFormSubmit(_, username, password) {
     try {
       const auth = getAuth();
-      console.log('auth', auth);
 
       const userCredential = await signInWithEmailAndPassword(auth, username, password);
-         console.log('Inicio de sesión exitoso. Usuario:', userCredential.email);  
+        //console.log('Inicio de sesión exitoso. Usuario:', userCredential.email);  
         const user = userCredential.user         
       loginUser({ email: user.email, uid: user.uid }); 
         navigate('/home');
