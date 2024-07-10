@@ -79,9 +79,9 @@ const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
         <PiSignIn />   
         { buttonText }
       </button>
-      {userNotFound && <del className='error'>{userNotFound}</del>}
 
       {isLogin ?  <Link to={"/signup"}>Don't have an account? </Link>  :  <Link to={"/login"}>Already been here? </Link>  }
+      {/* {userNotFound && <del className='error'>{userNotFound}</del>} */}
     </div>
   )
 }

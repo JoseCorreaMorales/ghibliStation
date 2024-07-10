@@ -7,19 +7,21 @@ import { CiCalendar } from "react-icons/ci";
 import { CiTimer } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
 import { RiMovie2Line } from "react-icons/ri";
-import { MdFavoriteBorder } from "react-icons/md";
-import {create, createFavorite } from '../services/favoriteMoviesService'
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
+import { createFavorite, isOnFavorite } from '../services/favoriteMoviesService'
 import { useContext } from 'react';
 import GhibliContext from '../context/ghibliContext';
+import Modal from "./modal"
 
 export default function Movie(props) {
-  const { id } = useParams();  
+    const { id } = useParams();
     const [movieDetails, setMovieDetails] = useState([]);
     const [loading, setLoading] = useState(true);
     const romanisedTitleRef = useRef(null)
-    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [existOnFavorite, setExistOnFavorite] = useState(null);
     const { userCredentials } = useContext(GhibliContext);
-
+    const { uid } = userCredentials;
     /* 
     {
     id: '86e544fd-79de-4e04-be62-5be67d8dd92e',
@@ -43,23 +45,25 @@ export default function Movie(props) {
     url: 'https://ghibliapi.dev/films/86e544fd-79de-4e04-be62-5be67d8dd92e'
   }
     */
-    
-    
+
     useEffect(() => {
         async function fetchMovie() {
             try {
                 const response = await axios.get(import.meta.env.VITE_BASE_URL + `/films/${id}`);
                 setMovieDetails(response.data);
+                const exist = await isOnFavorite(uid, id);
+                setExistOnFavorite(exist);
+                console.log(existOnFavorite)
                 setLoading(false)
-                //console.log(response.data);
-                console.log(userCredentials);
+
             } catch (error) {
                 console.error("Error fetching data: ", error);
             }
         }
         fetchMovie()
+
     }, [id]);
-        
+
     useEffect(() => {
         if (movieDetails && romanisedTitleRef.current) {
             romanisedTitleRef.current.setAttribute('data-title',
@@ -68,9 +72,9 @@ export default function Movie(props) {
         }
     }, [movieDetails])
 
-    const handleAddFavorite = async () => {
+  /*   const handleAddFavorite = async () => {
         const { uid } = userCredentials;
-        const {id, title, description, director, producer, release_date, running_time, rt_score, movie_banner } = movieDetails;
+        const { id, title, description, director, producer, release_date, running_time, rt_score, movie_banner } = movieDetails;
         const payload = {
             id,
             title,
@@ -82,15 +86,23 @@ export default function Movie(props) {
             rt_score,
             movie_banner
         }
-
         try {
-            await createFavorite(uid, payload)
-            console.log('Favorite added successfully')
+            if (existOnFavorite) {
+                return;
+            }
+            else {
+                await createFavorite(uid, payload)
+                console.log('Favorite added successfully')
+                setIsModalOpen(false)
+                setExistOnFavorite(true)
+            }
         } catch (error) {
             console.error('Error adding favorite: ', error)
         }
-     }
-
+    } */
+    const handleModalOpen = () => {
+        setIsModalOpen(true);
+    };
 
     if (loading) {
         return (
@@ -107,13 +119,14 @@ export default function Movie(props) {
             <main className="container-fliud">
                 <picture className='movie-banner-container'>
                     <div ref={romanisedTitleRef}></div>
-                        <img src={movieDetails.movie_banner} alt="" />
-                    </picture>
-                    
+                    <img src={movieDetails.movie_banner} alt="" />
+                </picture>
+
                 <section className="movie-details">
-                    <div className='movie-details--title' onClick={handleAddFavorite}>
+                    <div className='movie-details--title' onClick={handleModalOpen}>
                         <h1>{movieDetails.title}</h1>
-                        <MdFavoriteBorder />
+                        {existOnFavorite ? <MdFavorite /> : <MdFavoriteBorder />}
+                        {existOnFavorite}
                     </div>
                     <p>{movieDetails.description}</p>
                     <div className="details">
@@ -124,9 +137,18 @@ export default function Movie(props) {
                         <p><CiStar /><strong>Rotten Tomatoes Score:</strong> {movieDetails.rt_score}%.</p>
                     </div>
                 </section>
-            
+
+                <Modal
+                    isOpen={isModalOpen}
+                    movieDetails={movieDetails}
+                    onClose={() => setIsModalOpen(false)}
+                    credentials={userCredentials}
+                    existOnFavorite={existOnFavorite}
+                    setIsModalOpen={setIsModalOpen}
+                    setExistOnFavorite={setExistOnFavorite}
+                />
                 
-            </main>            
+            </main>
 
         </>
     )

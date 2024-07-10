@@ -1,16 +1,8 @@
 import { app } from '../firebase/firebase';
-import { getFirestore, collection, addDoc, doc, setDoc, getDocs, deleteDoc } from "firebase/firestore";
-
-
-export async function create(payload) {
-    return await app.firestore().collection("favorites")
-        .add(payload)
-}
-
+import { getFirestore, collection, addDoc, doc, setDoc, getDocs, deleteDoc, query, where, getDoc } from "firebase/firestore";
 
 const db = getFirestore();
 
-/* users -> userId -> favorites -> movieId -> movieDetails */
 export const createFavorite = async (userId, movie) => {
     try {
         const docRef = doc(collection(db, "users", userId, "favorites"));
@@ -21,7 +13,6 @@ export const createFavorite = async (userId, movie) => {
         console.error("Error adding favorite: ", error);
     }
 };
-
 
 export const getFavorites = async (userId) => {
     try {
@@ -35,7 +26,7 @@ export const getFavorites = async (userId) => {
         const favorites = querySnapshot.docs.map(doc => ({
             docId: doc.id,
             ...doc.data()
-        
+
         }));
 
         return favorites;
@@ -49,7 +40,6 @@ export const removeFavorite = async (userId, movieId) => {
     try {
         // Obtén una referencia al documento del favorito
         const favoriteRef = doc(db, "users", userId, "favorites", movieId);
-
         // Elimina el documento del favorito
         await deleteDoc(favoriteRef);
 
@@ -61,18 +51,19 @@ export const removeFavorite = async (userId, movieId) => {
 }
 
 
-
-/* 
-export async function createFavorite(data) {
+export const isOnFavorite = async (userId, movieId) => {
     try {
-        const db = getFirestore();
+        // Obtén una referencia a la subcolección "favorites" del usuario
+        const favoritesCollectionRef = collection(db, "users", userId, "favorites");
+        // console.log(favoritesCollectionRef.path)
 
+        // Crea una consulta para verificar si existe un documento con el campo `id` igual a `movieId`
+        const q = query(favoritesCollectionRef, where('id', '==', movieId));
+        const querySnapshot = await getDocs(q);
 
-        const document = await addDoc(collection(db, 'favorites'), {
-            data
-        });
-        console.log("Entró a firebase", document);
-        return document;
+        return !querySnapshot.empty; // Retorna true si se encontró al menos un documento
+    } catch (error) {
+        console.error("Error checking favorite: ", error);
+        throw new Error("Error checking favorite");
     }
-    catch (error) { console.log(error, error.message) }
-} */
+};

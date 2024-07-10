@@ -35,7 +35,7 @@ export const ThreeDModel = () => {
           minDistance={1}    // Distancia mínima a la que puede acercarse la cámara
           enableDamping={true} // Habilitar amortiguación
           dampingFactor={0.25} // Factor de amortiguación
-          rotateSpeed={0.4}    // Velocidad de rotación
+          rotateSpeed={3}    // Velocidad de rotación
           zoomSpeed={.5}      // Velocidad de zoom
           panSpeed={0.5}      // Velocidad de paneo
           autoRotate={true}   // Rotación automática
@@ -74,7 +74,6 @@ const [userNotFound, setUserNotFound] = useState('');
     }
   }
         /* const signinMethod = await fetchSignInMethodsForEmail(auth, username);
-
       if (signinMethod.length === 0) {
         console.log('User not found', signinMethod);
         return;
@@ -90,7 +89,7 @@ const [userNotFound, setUserNotFound] = useState('');
 
           <AuthForm onFormSubmit={handleFormSubmit} buttonText={"Login"} isLogin={true} >
           </AuthForm>
-          {userNotFound && <del className='error'>{userNotFound}</del>}
+        <div className='not-found'>{userNotFound && <del className='error'>{userNotFound}</del>}</div>
           {/* <Image /> */}
           <ThreeDModel />
 
