@@ -43,6 +43,7 @@ export default function Favorites(props) {
     const handleOpenModal = (film) => {
         setModalMovieDetails(film);
         setIsModalOpen(true);
+        console.log('open modal')
         // Verificar si la película está en favoritos
         const isFavorite = favorites.some(fav => fav.id === film.id);
         setExistOnFavorite(isFavorite);
@@ -77,7 +78,7 @@ export default function Favorites(props) {
                             >
                                 {/* <div className="svg" onClick={handleModalOpen}> */}
                                     {isHovered ?
-                                        <MdFavoriteBorder />
+                                    <MdFavoriteBorder onClick={() => handleOpenModal(film)}  />
                                         :
                                     <MdFavorite
                                         /* onClick={() => handleDeleteFav(film.docId)} */

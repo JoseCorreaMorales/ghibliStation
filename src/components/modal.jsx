@@ -1,5 +1,5 @@
 import React from 'react';
-import { createFavorite, removeFavorite } from '../services/favoriteMoviesService';
+import { createFavorite, removeFavorite, removeFavoriteById } from '../services/favoriteMoviesService';
 import { MdFileDownloadDone } from "react-icons/md";
 import { CiCircleRemove } from "react-icons/ci";
 
@@ -11,7 +11,13 @@ export default function Modal({ isOpen, movieDetails, onClose, credentials, exis
             if (existOnFavorite) {
                 setIsModalOpen(false);
                 setExistOnFavorite(false);
-                await removeFavorite(uid, movieDetails.docId);
+                if (!movieDetails.docId) {
+                    // When gettin info from Rest API server
+                    await removeFavoriteById(uid, movieDetails.id);
+                } else {
+                    // When getting info from Firebase server
+                    await removeFavorite(uid, movieDetails.docId);
+                }
                 window.location.reload();
             } else {
                 const payload = {
@@ -39,9 +45,9 @@ export default function Modal({ isOpen, movieDetails, onClose, credentials, exis
     return (
         <dialog open>
             <article>
-                <h2>Are you sure you want to
+                <h2>Are you sure you want to 
                     <strong className='modal-action'>
-                        {existOnFavorite ? ' remove' : ' add'}
+                        {existOnFavorite ? ' remove ' : ' add '}
                     </strong>
                     <strong className='modal-title'>
                         {movieDetails.title}

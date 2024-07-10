@@ -6,7 +6,7 @@ const db = getFirestore();
 export const createFavorite = async (userId, movie) => {
     try {
         const docRef = doc(collection(db, "users", userId, "favorites"));
-        console.log(docRef);
+        //console.log(docRef);
         await setDoc(docRef, movie);
         console.log("Favorite added successfully");
     } catch (error) {
