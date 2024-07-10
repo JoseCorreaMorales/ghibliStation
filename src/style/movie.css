@@ -60,6 +60,7 @@
 
     div:hover::after {
         content: attr(data-title);
+        /* content:  "test"; */
         position: absolute;
         top: 85%;
         left: 50%;

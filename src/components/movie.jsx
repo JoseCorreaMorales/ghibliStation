@@ -31,7 +31,6 @@ export default function Movie(props) {
                 setMovieDetails(response.data);
                 const exist = await isOnFavorite(uid, id);
                 setExistOnFavorite(exist);
-                //console.log(existOnFavorite)
                 setLoading(false)
 
             } catch (error) {
@@ -44,11 +43,9 @@ export default function Movie(props) {
 
     useEffect(() => {
         if (movieDetails && romanisedTitleRef.current) {
-            romanisedTitleRef.current.setAttribute('data-title',
-                movieDetails.original_title_romanised
-            )
+            romanisedTitleRef.current.setAttribute('data-title', movieDetails.original_title_romanised);
         }
-    }, [movieDetails])
+    }, [movieDetails, loading])
     
     
     const handleModalOpen = () => setIsModalOpen(true)

@@ -43,7 +43,6 @@ export default function Favorites(props) {
     const handleOpenModal = (film) => {
         setModalMovieDetails(film);
         setIsModalOpen(true);
-        console.log('open modal')
         // Verificar si la película está en favoritos
         const isFavorite = favorites.some(fav => fav.id === film.id);
         setExistOnFavorite(isFavorite);
