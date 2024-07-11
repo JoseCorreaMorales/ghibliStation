@@ -2,27 +2,24 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import GlobalState from "../context/globalState";
 import GhibliContext from "../context/ghibliContext";
 
-import Login from "../components/login";
-import Signup from "../components/resgister";
-import Logout from "./logout";
-import GhibliHome from "../components/ghibliHome";
-import Movie from "../components/movie";
-import Profile from "../components/profile";
-import Favorites from "../components/favorites";
+import Login from "./Auth/login.jsx";
+import Signup from "./Auth/resgister.jsx";
+import Logout from "./Auth/logout.jsx";
+import GhibliHome from "./Home/ghibliHome.jsx";
+import Movie from "./Movie/movie.jsx";
+import Profile from "./Profile/profile.jsx";
+import Favorites from "./Favorites/favorites.jsx";
 
 export default function Rutas() {
   return (
     <GlobalState>
       <GhibliContext.Consumer>
         {(context) => {
-          console.log("User login status:", context.userLogin);
-          return (
-            
-            
+          //console.log("User login status:", context.userLogin);
+          return (                        
           <Routes>
           {
               !context.userLogin &&
-              //!context.isLogin &&
               <>
                   <Route path="/" element={<Login />} />
                   <Route path="/login" element={<Login />} />
@@ -41,10 +38,6 @@ export default function Rutas() {
               <Route path="/*" element={<GhibliHome />} />          
               </>}
       </Routes>  
-
-
-
-
           );
         }}
       </GhibliContext.Consumer>

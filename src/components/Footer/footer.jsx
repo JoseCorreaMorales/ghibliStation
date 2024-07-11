@@ -1,6 +1,6 @@
 import React from 'react'
-import Image from '../assets/icons8-totoro.svg'
-import House from '../assets/house.png'
+import Image from '../../assets/icons8-totoro.svg'
+import House from '../../assets/house.png'
 import { FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FiInstagram } from "react-icons/fi";

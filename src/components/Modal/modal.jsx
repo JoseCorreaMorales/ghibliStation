@@ -1,5 +1,5 @@
 import React from 'react';
-import { createFavorite, removeFavorite, removeFavoriteById } from '../services/favoriteMoviesService';
+import { createFavorite, removeFavorite, removeFavoriteById } from '../../services/favoriteMoviesService.jsx';
 import { MdFileDownloadDone } from "react-icons/md";
 import { CiCircleRemove } from "react-icons/ci";
 

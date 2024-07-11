@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react'
-import { getFavorites } from '../services/favoriteMoviesService'
-import GhibliContext from '../context/ghibliContext';
+import { getFavorites } from '../../services/favoriteMoviesService'
+import GhibliContext from '../../context/ghibliContext';
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import '../style/favorites.css'
+import './favorites.css'
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import { removeFavorite } from '../services/favoriteMoviesService'
-import Modal from './modal'
+import { removeFavorite } from '../../services/favoriteMoviesService'
+import Modal from '../Modal/modal'
 
 export default function Favorites(props) {
     const { userCredentials } = useContext(GhibliContext);

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate, Link } from "react-router-dom";
 import '@picocss/pico'
-import '../style/theme.css'
-import '../style/login.css'
+import '../common/theme.css'
+import './login.css'
 import { PiSignIn } from "react-icons/pi";
 
 const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
@@ -14,8 +14,6 @@ const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
   const [passwordError, setPasswordError] = useState('');
   const [userNotFound, setUserNotFound] = useState('');
   const [nameError, setNameError] = useState('');
-
-
 
   const validateLogin = () => {
     let isValid = true;
@@ -85,7 +83,6 @@ const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
     </div>
   )
 }
-
 export default AuthForm
 
 

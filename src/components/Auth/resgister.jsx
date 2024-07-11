@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GhibliContext from "../context/ghibliContext";
+import GhibliContext from "../../context/ghibliContext";
 import "@picocss/pico";
-import "../style/theme.css";
-import "../style/login.css";
-import loginImg from "../assets/loginImg.svg";
+import "../common/theme.css";
+import "./login.css";
+import loginImg from "../../assets/loginImg.svg";
 import AuthForm from "./AuthForm";
-import { createuser } from "../services/usersServices";
+import { createuser } from "../../services/usersServices";
 import { ThreeDModel } from './login'
 
 const Image = () => {

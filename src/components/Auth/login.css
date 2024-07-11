@@ -1,4 +1,4 @@
-@import url('./theme.css');
+@import url('../common/theme.css');
 .container-flex {
     display: flex;
     gap: 3rem;

@@ -1,12 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "../style/home.css";
-import "../style/footer.css";
+import "./home.css";
+import "../Footer/footer.css";
 import { FaStar } from 'react-icons/fa'
 import { FaClock } from "react-icons/fa";
 import { BiSolidTrain } from "react-icons/bi";
-import Search from "./search";
-import Footer from "./footer"
+import Footer from "../Footer/footer"
 import { IoFilter } from "react-icons/io5";
 import { FaSortAlphaDown } from "react-icons/fa";
 import { FaSortAlphaDownAlt } from "react-icons/fa";

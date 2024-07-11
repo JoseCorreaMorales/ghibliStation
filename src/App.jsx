@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import Navbar from './components/navbar';
-import Rutas from './components/routes';
+import Navbar from './components/Navbar/navbar.jsx';
+import Rutas from './components/routes.jsx';
 import GlobalState from './context/globalState'; 
 import GhibliContext from './context/ghibliContext'
 

@@ -1,17 +1,17 @@
 import "@picocss/pico";
-import "../style/navbar.css";
+import "./navbar.css";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import GhibliContext from "../context/ghibliContext";
+import GhibliContext from "../../context/ghibliContext";
 import { useContext, useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseOutline } from "react-icons/io5";
-import totoro from "../assets/icons8-totoro.svg";
+import totoro from "../../assets/icons8-totoro.svg";
 import { BsMoonFill } from "react-icons/bs";
 import { MdSunny } from "react-icons/md";
-import Logout from "./logout";
-import GhibliHome from "./ghibliHome";
-import Profile from "./profile";
-import Favorites from "./favorites";
+import Logout from "../Auth/logout.jsx";
+import GhibliHome from "../Home/ghibliHome.jsx";
+import Profile from "../Profile/profile.jsx";
+import Favorites from "../Favorites/favorites.jsx";
 
 
 const ToggleTheme = () => {

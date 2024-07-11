@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
-import GhibliContext from '../context/ghibliContext';
+import GhibliContext from '../../context/ghibliContext.jsx';
 import { useEffect } from 'react';
-import { getCurrentUsername, } from '../services/usersServices'
-import avatar from '../assets/avatar.png'
-import '../style/profile.css'
+import { getCurrentUsername, } from '../../services/usersServices.jsx'
+import avatar from '../../assets/avatar.png'
+import './profile.css'
 
 export default function Profile(props) {
     const { userCredentials } = useContext(GhibliContext);

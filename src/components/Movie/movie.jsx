@@ -1,17 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import '../style/movie.css'
+import './movie.css'
 import { GiDirectorChair } from "react-icons/gi";
 import { CiCalendar } from "react-icons/ci";
 import { CiTimer } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
 import { RiMovie2Line } from "react-icons/ri";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import { createFavorite, isOnFavorite } from '../services/favoriteMoviesService'
+import { createFavorite, isOnFavorite } from '../../services/favoriteMoviesService'
 import { useContext } from 'react';
-import GhibliContext from '../context/ghibliContext';
-import Modal from "./modal"
+import GhibliContext from '../../context/ghibliContext';
+import Modal from "../Modal/modal.jsx"
 
 export default function Movie(props) {
     const { id } = useParams();
