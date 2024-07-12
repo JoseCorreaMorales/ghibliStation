@@ -62,13 +62,24 @@ const AuthForm = ({ onFormSubmit, buttonText, isLogin}) => {
       }
       <div className='input-item'>
         <label htmlFor="username">Username</label>
-        <input type="email" name='username' placeholder='username' onChange={(e) => setUsername(e.target.value)} required />
+        <input
+          type="email"
+          name='username'
+          placeholder={isLogin ? 'try with: guest@domain.com' : 'username'}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
         {usernameError && <del className='error'>{usernameError}</del>}
       </div>
 
       <div className='input-item'>
         <label htmlFor="password">Password</label>
-        <input type="password" name='password' placeholder='password' onChange={(e) => setPassword(e.target.value)} required />
+        <input
+          type="password"
+          name='password'
+          placeholder={isLogin ? 'try with: 12345678' : 'password'}
+          onChange={(e) => setPassword(e.target.value)}
+          required />
         {passwordError && <del className='error'>{passwordError}</del>}
       </div>
 
