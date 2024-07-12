@@ -39,7 +39,7 @@ export const ThreeDModel = () => {
           zoomSpeed={.5}      // Velocidad de zoom
           panSpeed={0.5}      // Velocidad de paneo
           autoRotate={true}   // Rotación automática
-          autoRotateSpeed={0.3} // Velocidad de rotación automática
+          autoRotateSpeed={1.5} // Velocidad de rotación automática
           enablePan={true}    // Habilitar paneo
           enableRotate={true} // Habilitar rotación
         />

@@ -23,14 +23,35 @@ Explore, discover, and immerse yourself in a universe where cats transform into 
 ## Design
 - [Figma](https://www.figma.com/design/9jOJ4yj9hemH6kxBP1tl7u/GHibli-Station?node-id=0-1&t=ncPqI2BryctaZ9OA-1)
 
+
+## Color palette 
+
+### Light theme 
+<p align="center">
+<img src="https://img.shields.io/badge/-35155D-35155D?style=for-the-badge&logo=react&logoColor=white" alt="35155D" />
+<img src="https://img.shields.io/badge/-512B81-512B81?style=for-the-badge&logo=react&logoColor=white" alt="512B81" />
+<img src="https://img.shields.io/badge/-4477CE-4477CE?style=for-the-badge&logo=react&logoColor=white" alt="4477CE" />
+<img src="https://img.shields.io/badge/-8CABFF-8CABFF?style=for-the-badge&logo=react&logoColor=white" alt="8CABFF" />
+</p>
+
+### Dark theme
+<p align="center">
+<img src="https://img.shields.io/badge/-E19898-E19898?style=for-the-badge&logo=react&logoColor=white" alt="E19898" />
+<img src="https://img.shields.io/badge/-A2678A-A2678A?style=for-the-badge&logo=react&logoColor=white" alt="A2678A" />
+<img src="https://img.shields.io/badge/-4D3C77-4D3C77?style=for-the-badge&logo=react&logoColor=white" alt="4D3C77" />
+<img src="https://img.shields.io/badge/-3F1D38-3F1D38?style=for-the-badge&logo=react&logoColor=white" alt="3F1D38" />
+
+<p>
+
+
 ## Commands
 
-### Install dependencies
+### Install dependencies to optimize the model
 ```bash
 gltf-pipeline -i model-name.glb -o model-optimized.glb
 ```
 
-### Convert to JSX
+### Convert model to JSX
 ```bash
 npx gltfjsx model-optimized.glb
 ```

@@ -17,7 +17,7 @@ export async function createuser(name, username, password) {
     const document = await addDoc(collection(db, 'users'), {
       name: name,
       username: username,
-      password: password,
+      /* password: password, */
       userId: userId,
     });
     console.log("Entró a firebase", document);
